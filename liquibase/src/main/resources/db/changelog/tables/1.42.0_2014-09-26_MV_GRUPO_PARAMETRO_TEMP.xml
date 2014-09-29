@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+     http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+      
+    <changeSet author="mvfor" id="create_table_MV_GRUPO_PARAMETRO_TEMP">
+        <preConditions onError="HALT" onFail="MARK_RAN" onSqlOutput="IGNORE">
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM ALL_TABLES WHERE TABLE_NAME = 'MV_GRUPO_PARAMETRO_TEMP' AND OWNER = 'DBAMVFOR'</sqlCheck>
+        </preConditions>
+        
+        <createTable tableName="MV_GRUPO_PARAMETRO_TEMP" schemaName="DBAMVFOR" tablespace="TS_MVSISS_D" remarks="Cópia da tabela MV_GRUPO_PARAMETRO">
+            <column name="CD_GRUPO_PARAMETRO" remarks="" type="NUMBER(2, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CNT_MV_GRUPO_PARAMETRO_TEMP_PK"/>
+            </column>
+            
+            <column name="DS_DESCRICAO" remarks="" type="VARCHAR2(100)">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </createTable>
+        
+        <createSequence cycle="false" incrementBy="1" maxValue="9999999999" minValue="1" schemaName="DBAMVFOR" sequenceName="MV_SEQ_GRUPO_PARAMETRO_TEMP" startValue="1"/>
+        
+<!--         <createIndex indexName="CNT_MV_GRUPO_PARAMETRO_TEMP_PK" schemaName="DBAMVFOR" tableName="MV_GRUPO_PARAMETRO_TEMP" tablespace="TS_MVSISS_I" unique="true"> -->
+<!--             <column name="CD_GRUPO_PARAMETRO"/> -->
+<!--         </createIndex> -->
+        
+        <comment>CRIAÇÃO DA TABELA MV_GRUPO_PARAMETRO_TEMP</comment>
+    </changeSet>    
+    
+</databaseChangeLog>

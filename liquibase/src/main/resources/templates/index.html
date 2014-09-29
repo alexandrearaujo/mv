@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+	<head th:include="fragments/layout :: htmlhead" th:with="title='MV Migrations'"/>
+
+	<body>
+		<div th:replace="fragments/layout :: navbar">(navbar)</div>
+	
+		<div class="container">
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<h1>
+					<label th:text="Olá"></label>
+				</h1>
+				<p class="lead">Bem vindo ao Sistema de criação de scripts do Liquibase.</p>
+				<p>
+					<a href="#" class="btn btn-primary btn-lg" role="button">Saiba mais &raquo;</a>
+				</p>
+			</div>
+		</div>
+		
+		<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
+	</body>
+</html>

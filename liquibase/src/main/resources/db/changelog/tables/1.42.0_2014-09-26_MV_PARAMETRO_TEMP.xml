@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+     http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+      
+    <changeSet author="mvfor" id="create_table_MV_PARAMETRO_TEMP">
+        <preConditions onError="HALT" onFail="MARK_RAN" onSqlOutput="IGNORE">
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM ALL_TABLES WHERE TABLE_NAME = 'MV_PARAMETRO_TEMP' AND OWNER = 'DBAMVFOR'</sqlCheck>
+        </preConditions>
+        
+        <createTable tableName="MV_PARAMETRO_TEMP" schemaName="DBAMVFOR" tablespace="TS_MVSISS_D" remarks="Cópia da tabela MV_PARAMETRO">
+            <column name="ID" remarks="" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CNT_MV_PARAMETRO_TEMP_PK"/>
+            </column>
+            
+            <column name="CHAVE" remarks="" type="VARCHAR2(50)">
+                <constraints nullable="false" primaryKey="false" unique="true" uniqueConstraintName="CNT_MV_PARAMETRO_TEMP_1_UK"/>
+            </column>
+            
+            <column name="DESCRICAO" remarks="" type="VARCHAR2(200)">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            
+            <column name="VALOR" remarks="" type="VARCHAR2(300)">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            
+        	<column name="CD_GRUPO_PARAMETRO" type="NUMBER(2,0)" defaultValueNumeric="1">
+        	</column>
+        	
+            <column name="TELA" remarks="" type="VARCHAR2(50)">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        	
+            <column name="OBRIGATORIO" remarks="" type="NUMBER(1, 0)" defaultValueNumeric="0">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        	
+            <column name="TP_PARAMETRO" remarks="Informa o tipo de parâmetro para a renderização da tela de edição: 0 - TEXTO; 1 - NUMERICO; 2 - LÓGICO; 3 - IMAGEM; 4 - SELEÇÃO ÚNICA; 5 - SELEÇÃO MULTIPLA" type="NUMBER(1, 0)" defaultValueNumeric="0">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        	
+            <column name="DS_OBJETIVO" remarks="Descrição detalhada do parâmetro, para que serve e onde é utilizado" type="VARCHAR2(4000)">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        	
+            <column name="LO_ARQUIVO" remarks="Armazena o arquivo em formato binário." type="BLOB">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        	
+            <column name="TP_MIME_ARQUIVO" remarks="Tipo mime do arquivo." type="VARCHAR2(255)">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        	
+            <column name="NM_ARQUIVO" remarks="Nome do arquivo, inclusive sua extensão." type="VARCHAR2(255)">
+                <constraints nullable="true" primaryKey="false"/>
+            </column>
+        </createTable>
+        
+        <createSequence cycle="false" incrementBy="1" maxValue="9999999999" minValue="1" schemaName="DBAMVFOR" sequenceName="MV_SEQ_PARAMETROS_TEMP" startValue="1"/>
+        
+<!--         <createIndex indexName="CNT_MV_PARAMETRO_TEMP_PK" schemaName="DBAMVFOR" tableName="MV_PARAMETRO_TEMP" tablespace="TS_MVSISS_I" unique="true"> -->
+<!--             <column name="ID"/> -->
+<!--         </createIndex> -->
+        
+        <comment>CRIAÇÃO DA TABELA MV_PARAMETRO_TEMP</comment>
+    </changeSet>    
+    
+</databaseChangeLog>

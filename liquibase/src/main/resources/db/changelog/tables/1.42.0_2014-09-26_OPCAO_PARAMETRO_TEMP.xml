@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+     http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+      
+    <changeSet author="mvfor" id="create_table_OPCAO_PARAMETRO_TEMP">
+        <preConditions onError="HALT" onFail="MARK_RAN" onSqlOutput="IGNORE">
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM ALL_TABLES WHERE TABLE_NAME = 'OPCAO_PARAMETRO_TEMP' AND OWNER = 'DBAMVFOR'</sqlCheck>
+        </preConditions>
+        
+        <createTable tableName="OPCAO_PARAMETRO_TEMP" schemaName="DBAMVFOR" tablespace="TS_MVSISS_D" remarks="Cópia da tabela MV_GRUPO_PARAMETRO">
+            <column name="CD_OPCAO_PARAMETRO" remarks="Chave da tabela." type="NUMBER(8, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CNT_OPCAO_PARAMETRO_TEMP_PK"/>
+            </column>
+            
+            <column name="CD_PARAMETRO" remarks="Parâmetro  da opção." type="NUMBER(8, 0)">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            
+            <column name="DS_OPCAO_PARAMETRO" remarks="Descrição da opção." type="VARCHAR2(200)">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            
+            <column name="SN_ATIVO" remarks="Se a opção do parâmetro está ativa. 0- Não, 1- Sim." type="NUMBER(1, 0)" defaultValueNumeric="0">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </createTable>
+        
+        <createSequence cycle="false" incrementBy="1" maxValue="9999999999" minValue="1" schemaName="DBAMVFOR" sequenceName="SEQ_OPCAO_PARAMETRO_TEMP" startValue="1"/>
+        
+<!--         <createIndex indexName="CNT_OPCAO_PARAMETRO_TEMP_PK" schemaName="DBAMVFOR" tableName="OPCAO_PARAMETRO_TEMP" tablespace="TS_MVSISS_I" unique="true"> -->
+<!--             <column name="CD_OPCAO_PARAMETRO"/> -->
+<!--         </createIndex> -->
+        
+        <comment>CRIAÇÃO DA TABELA OPCAO_PARAMETRO_TEMP</comment>
+    </changeSet>    
+    
+</databaseChangeLog>

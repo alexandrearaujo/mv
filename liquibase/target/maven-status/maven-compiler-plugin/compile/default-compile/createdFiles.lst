@@ -1,0 +1,12 @@
+br\com\mv\liquibase\model\ColumnConfigLiquibase.class
+br\com\mv\liquibase\repository\ParametroRepository.class
+br\com\mv\liquibase\Application.class
+br\com\mv\liquibase\service\CreateTableService.class
+br\com\mv\liquibase\model\GrupoParametro.class
+br\com\mv\liquibase\model\OpcaoParametro.class
+br\com\mv\liquibase\service\ParametroService.class
+br\com\mv\liquibase\web\LiquibaseController.class
+br\com\mv\liquibase\repository\CreateTableRepository.class
+br\com\mv\liquibase\repository\GrupoParametroRepository.class
+br\com\mv\liquibase\model\Parametro.class
+br\com\mv\liquibase\model\CreateTableForm.class

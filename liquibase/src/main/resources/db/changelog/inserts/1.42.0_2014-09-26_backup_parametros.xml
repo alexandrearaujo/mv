@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+     http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+      
+    <changeSet author="mvfor" id="insert_MV_PARAMETRO_TEMP">
+        <ext:merge
+            targetTableName="MV_GRUPO_PARAMETRO_TEMP"
+        	targetSchemaName="DBAMVFOR"
+		    sourceTableName="MV_GRUPO_PARAMETRO"
+		    sourceSchemaName="DBAMVFOR"
+		    onCondition="0=1"
+		    insertColumnsNameList="(MV_GRUPO_PARAMETRO_TEMP.CD_GRUPO_PARAMETRO, MV_GRUPO_PARAMETRO_TEMP.DS_DESCRICAO"
+			insertColumnsValueList="MV_GRUPO_PARAMETRO.CD_GRUPO_PARAMETRO, MV_GRUPO_PARAMETRO.DS_DESCRICAO"
+		/>
+		
+		<ext:merge
+            targetTableName="MV_PARAMETRO_TEMP"
+        	targetSchemaName="DBAMVFOR"
+		    sourceTableName="MV_PARAMETRO"
+		    sourceSchemaName="DBAMVFOR"
+		    onCondition="0=1"
+		    insertColumnsNameList="(MV_PARAMETRO_TEMP.ID, MV_PARAMETRO_TEMP.CHAVE, MV_PARAMETRO_TEMP.DESCRICAO, MV_PARAMETRO_TEMP.VALOR, MV_PARAMETRO_TEMP.OBRIGATORIO, MV_PARAMETRO_TEMP.TP_PARAMETRO, MV_PARAMETRO_TEMP.CD_GRUPO_PARAMETRO, MV_PARAMETRO_TEMP.TELA, MV_PARAMETRO_TEMP.LO_ARQUIVO, MV_PARAMETRO_TEMP.TP_MIME_ARQUIVO, MV_PARAMETRO_TEMP.NM_ARQUIVO, MV_PARAMETRO_TEMP.DS_OBJETIVO"
+			insertColumnsValueList="MV_PARAMETRO.ID, MV_PARAMETRO.CHAVE, MV_PARAMETRO.DESCRICAO, MV_PARAMETRO.VALOR, MV_PARAMETRO.OBRIGATORIO, MV_PARAMETRO.TP_PARAMETRO, MV_PARAMETRO.CD_GRUPO_PARAMETRO, MV_PARAMETRO.TELA, MV_PARAMETRO.LO_ARQUIVO, MV_PARAMETRO.TP_MIME_ARQUIVO, MV_PARAMETRO.NM_ARQUIVO, MV_PARAMETRO.DS_OBJETIVO"
+		/>
+		
+		<ext:merge
+            targetTableName="OPCAO_PARAMETRO_TEMP"
+        	targetSchemaName="DBAMVFOR"
+		    sourceTableName="OPCAO_PARAMETRO"
+		    sourceSchemaName="DBAMVFOR"
+		    onCondition="0=1"
+		    insertColumnsNameList="(OPCAO_PARAMETRO_TEMP.CD_OPCAO_PARAMETRO, OPCAO_PARAMETRO_TEMP.CD_PARAMETRO, OPCAO_PARAMETRO_TEMP.DS_OPCAO_PARAMETRO, OPCAO_PARAMETRO_TEMP.SN_ATIVO"
+			insertColumnsValueList="OPCAO_PARAMETRO.CD_OPCAO_PARAMETRO, OPCAO_PARAMETRO.CD_PARAMETRO, OPCAO_PARAMETRO.DS_OPCAO_PARAMETRO, OPCAO_PARAMETRO.SN_ATIVO"
+		/>
+        
+        <comment>Cópia dos dados das tabelas MV_PARAMETRO para a tabela MV_PARAMETRO_TEMP, OPCAO_PARAMETRO PARA OPCAO_PARAMETRO_TEMP E MV_GRUPO_PARAMETRO PARA MV_GRUPO_PARAMETRO_TEMP</comment>
+    </changeSet>    
+    
+</databaseChangeLog>

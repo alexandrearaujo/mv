@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd
+         http://www.liquibase.org/xml/ns/dbchangelog-ext
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<!-- Criação das tabelas temporarias -->
+	<include file="db/changelog/tables/1.42.0_2014-09-26_MV_GRUPO_PARAMETRO_TEMP.xml"/>
+    <include file="db/changelog/tables/1.42.0_2014-09-26_MV_PARAMETRO_TEMP.xml"/>
+    <include file="db/changelog/tables/1.42.0_2014-09-26_OPCAO_PARAMETRO_TEMP.xml"/>
+
+
+    <!-- Backup dos dados das tabelas MV_PARAMETRO para a tabela MV_PARAMETRO_TEMP, OPCAO_PARAMETRO PARA OPCAO_PARAMETRO_TEMP E MV_GRUPO_PARAMETRO PARA MV_GRUPO_PARAMETRO_TEMP -->
+	<include file="db/changelog/inserts/1.42.0_2014-09-26_backup_parametros.xml"/>    
+	
+	
+ 	<!-- apaga todos os dados da MV_PARAMETRO, OPCAO_PARAMETRO e MV_GRUPO_PARAMETRO-->
+    <include file="db/changelog/deletes/1.42.0_2014-09-26_delete_all_parametros.xml"/>
+    
+    
+	<!-- cria os parametros, opção parametro e grupo parametros -->
+    <include file="db/changelog/inserts/1.42.0_2014-09-29_create_parametros.xml"/>
+    
+    
+	<!-- merge dos dados de parametro e opção parametro -->
+    <include file="db/changelog/updates/1.42.0_2014-09-26_merge_backup_parametros.xml"/>
+</databaseChangeLog>
