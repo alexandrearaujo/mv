@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <grupoParametro>
+    <id>15</id>
+    <descricao>IMAGENS</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>16</id>
+    <descricao>CONTROLE DE ACESSO</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>17</id>
+    <descricao>REGULADOR LEITOS</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>18</id>
+    <descricao>CMCE</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>19</id>
+    <descricao>VACINA</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>20</id>
+    <descricao>PSF</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>21</id>
+    <descricao>FATURAMENTO</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>22</id>
+    <descricao>ESF</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>23</id>
+    <descricao>TRANSPORTE SANITÁRIO</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>24</id>
+    <descricao>SYSREPORT</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>13</id>
+    <descricao>GERAL</descricao>
+  </grupoParametro>
+  
+  <grupoParametro>
+    <id>14</id>
+    <descricao>INTEGRAÇÃO</descricao>
+  </grupoParametro>
+</list>

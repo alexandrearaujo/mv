@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+	<head th:include="fragments/layout :: htmlhead" th:with="title='Criação de Parametros'"/>
+
+	<body role="document">
+		<div th:replace="fragments/layout :: navbar">(navbar)</div>
+	
+		<div class="container">
+			<div class="container-fluid">
+				<form class="form-horizontal" action="#" th:action="@{/createParametro}" th:object="${parametro}" th:method="post">
+					<fieldset>
+						<legend>Parametro</legend>
+						
+						<div class="form-group">
+						    <label class="control-label col-xs-3" for="chave">Chave</label>
+						    <div class="col-xs-9">
+							    <input type="text" class="form-control" maxlength="50" autofocus="autofocus"
+							  	       id="chave" th:field="*{chave}" th:errorclass="error"/>
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label class="control-label col-xs-3" for="valor">Valor</label>
+						    <div class="col-xs-9">
+							    <input type="text" class="form-control" id="valor" name="valor" th:field="*{valor}"
+							    	   maxlength="300" th:errorclass="error"/>  
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label class="control-label col-xs-3" for="remarks">Descrição</label>
+						    <div class="col-xs-9">
+							    <input type="text" class="form-control" id="descricao" name="descricao" th:field="*{descricao}"
+							    	   maxlength="200"/>  
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label class="control-label col-xs-3" for="remarks">Descrição do Objetivo</label>
+						    <div class="col-xs-9">
+							    <input type="text" class="form-control" id="descricaoObjetivo" name="descricaoObjetivo"
+							    	   th:field="*{descricaoObjetivo}" maxlength="4000"/>  
+						    </div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-xs-3" for="grupoParametro">Grupo Parametro</label>
+							<div class="col-xs-9">
+								<select	th:field="*{grupoParametro}" class="form-control" id="grupoParametro">
+									<option th:each="grupoParametro : ${grupoParametros}" th:value="${grupoParametro}"
+										    th:text="${grupoParametro.descricao}"></option>
+								</select>
+							</div>
+						</div>
+
+					<!-- 						<div class="form-group"> -->
+<!-- 						    <label class="control-label col-xs-3" for="tablespace">Table Space</label> -->
+<!-- 						    <div class="col-xs-9"> -->
+<!-- 							    <input type="text" class="form-control" id="tablespace" name="tablespace" th:field="*{createTableChange.tablespace}"/> -->
+<!-- 						    </div> -->
+<!-- 						</div> -->
+	
+<!-- 					<div> -->
+<!-- 						<label for="datePlanted"> <span -->
+<!-- 							th:text="#{seedstarter.datePlanted}">Date planted</span> (<span -->
+<!-- 							th:text="#{date.format}">YYYY/MM/DD</span>) -->
+<!-- 						</label> <input type="text" th:field="*{datePlanted}" -->
+<!-- 							th:errorclass="fieldError" /> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label th:for="${#ids.next('covered')}" -->
+<!-- 							th:text="#{seedstarter.covered}">Covered</label> <input -->
+<!-- 							type="checkbox" th:field="*{covered}" /> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label for="type" th:text="#{seedstarter.type}">Type</label> <select -->
+<!-- 							th:field="*{type}"> -->
+<!-- 							<option th:each="type : ${allTypes}" th:value="${type}" -->
+<!-- 								th:text="#{${'seedstarter.type.' + type}}">Wireframe</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label th:text="#{seedstarter.features}">Features</label> -->
+<!-- 						<ul> -->
+<!-- 							<li th:each="feat : ${allFeatures}"><input type="checkbox" -->
+<!-- 								th:field="*{features}" th:value="${feat}" /> <label -->
+<!-- 								th:for="${#ids.prev('features')}" -->
+<!-- 								th:text="#{${'seedstarter.feature.' + feat}}">Electric -->
+<!-- 									Heating</label></li> -->
+<!-- 							<li th:remove="all"><input id="removed1" type="checkbox" /> -->
+<!-- 								<label for="removed1">Turf</label></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+	
+						
+					</fieldset>
+				</form>
+
+<!-- 					    <div id="columnModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="columnModalLabel" aria-hidden="true"> -->
+<!-- 					        <div class="modal-dialog modal-lg"> -->
+<!-- 					            <div class="modal-content"> -->
+<!-- 					                <div class="modal-header"> -->
+<!-- 					                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 					                    <h4 class="modal-title" id="columnModalLabel">Adicionar Coluna</h4> -->
+<!-- 					                </div> -->
+					                
+<!-- 					                <div class="modal-body"> -->
+<!-- 					                    <div class="form-group"> -->
+<!-- 										    <label class="control-label col-xs-3" for="columnName">Nome</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" maxlength="30" autofocus="autofocus" -->
+<!-- 											  	       id="columnName" th:field="*{columnConfig.name}" th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 										    <label class="control-label col-xs-3" for="columnRemarks">Comentário</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnRemarks" th:field="*{columnConfig.remarks}" -->
+<!-- 											     	   th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 										    <label class="control-label col-xs-3" for="columnType">Tipo</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnType" th:field="*{columnConfig.type}" -->
+<!-- 											     placeholder="VARCHAR2(255)" th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 										    <label class="control-label col-xs-3" for="columnDefaultValue">Valor Padrão</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnDefaultValue" th:field="*{columnConfig.defaultValue}" -->
+<!-- 											    	   th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 											<div class="col-xs-offset-3 col-xs-9"> -->
+<!-- 								                <label class="checkbox-inline"> -->
+<!-- 								                    <input type="checkbox" id="columnConstraintsNullable" th:field="*{columnConfig.nullable}" -->
+<!-- 								                    	   th:errorclass="fieldError"/> -->
+<!-- 								                     Permite Nulo? -->
+<!-- 								                </label> -->
+<!-- 								            </div> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 											<div class="col-xs-offset-3 col-xs-9"> -->
+<!-- 								                <label class="checkbox-inline"> -->
+<!-- 								                    <input type="checkbox" id="columnConstraintsPrimaryKey" th:field="*{columnConfig.primaryKey}" -->
+<!-- 								                    	   th:errorclass="fieldError"/> -->
+<!-- 								                     Chave Primária? -->
+<!-- 								                </label> -->
+<!-- 								            </div> -->
+<!-- 										</div> -->
+										
+<!-- 								        <div class="form-group"> -->
+<!-- 							                <label class="control-label col-xs-3" for="columnConstraintsPrimaryKeyName"> -->
+<!-- 							                Nome da Chave Primária -->
+<!-- 							                </label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnConstraintsPrimaryKeyName" -->
+<!-- 													   th:field="*{columnConfig.constraints.primaryKeyName}" maxlength="30" -->
+<!-- 													   th:errorclass="fieldError" placeholder="CNT_(TABELA)_PK"/> -->
+<!-- 										    </div> -->
+<!-- 								        </div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 											<div class="col-xs-offset-3 col-xs-9"> -->
+<!-- 								                <label class="checkbox-inline"> -->
+<!-- 								                    <input type="checkbox" id="columnConstraintsUnique" th:field="*{columnConfig.unique}" -->
+<!-- 								                    	   th:errorclass="fieldError"/> -->
+<!-- 								                     Unique? -->
+<!-- 								                </label> -->
+<!-- 								            </div> -->
+<!-- 										</div> -->
+										
+<!-- 							            <div class="form-group"> -->
+<!-- 							                <label class="control-label col-xs-3" for="columnConstraintsUniqueName">Nome da Unique</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnConstraintsUniqueName" -->
+<!-- 													   th:field="*{columnConfig.constraints.uniqueConstraintName}" maxlength="30" -->
+<!-- 													   th:errorclass="fieldError" placeholder="CNT_(TABELA)_(SEQUENCIAL 1,2,3...)_UK"/> -->
+<!-- 										    </div> -->
+<!-- 							            </div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 							                <label class="control-label col-xs-3" for="columnConstraintsForeignKeyName"> -->
+<!-- 							                Nome da Chave Estrangeira -->
+<!-- 							                </label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnConstraintsForeignKeyName" -->
+<!-- 													   th:field="*{columnConfig.constraints.foreignKeyName}" maxlength="30" -->
+<!-- 													   th:errorclass="fieldError" placeholder="CNT_(TABELA ORIGEM)_(TABELA DESTINO)_FK"/> -->
+<!-- 										    </div> -->
+<!-- 								        </div> -->
+								            
+<!-- 							            <div class="form-group"> -->
+<!-- 							                <label class="control-label col-xs-3" for="columnConstraintsReferences">References</label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnConstraintsReferences" -->
+<!-- 													   th:field="*{columnConfig.constraints.references}" -->
+<!-- 													   placeholder="TABELA(COLUNA)" -->
+<!-- 													   th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 							            </div> -->
+										
+<!-- 										<div class="form-group"> -->
+<!-- 							                <label class="control-label col-xs-3" for="columnConstraintsCheckConstraint"> -->
+<!-- 							                Check Constraint -->
+<!-- 							                </label> -->
+<!-- 										    <div class="col-xs-9"> -->
+<!-- 											    <input type="text" class="form-control" id="columnConstraintsCheckConstraint" -->
+<!-- 													   th:field="*{columnConfig.constraints.checkConstraint}" -->
+<!-- 													   th:errorclass="fieldError"/> -->
+<!-- 										    </div> -->
+<!-- 										</div> -->
+<!-- 					                </div> -->
+					                
+<!-- 					                <div class="modal-footer"> -->
+<!-- 					                    <button type="submit" name="adicionarColuna" class="btn btn-primary">OK</button> -->
+<!-- 					                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> -->
+<!-- 					                </div> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+					    </div>
+				
+<!-- 				<form class="form-horizontal" action="#" th:action="@{/createTable}" th:object="${createTableChange}" id="tableColunasForm"> -->
+<!-- 					<fieldset> -->
+<!-- 						<label>Colunas</label> -->
+<!-- 						<div class="table-responsive"> -->
+<!-- 							<table class="table table-condensed table-bordered table-striped table-hover"> -->
+<!-- 								<thead> -->
+<!-- 									<tr class="info"> -->
+<!-- 										<th>#</th> -->
+<!-- 										<th>Nome</th> -->
+<!-- 										<th>Comentário</th> -->
+<!-- 										<th>Tipo</th> -->
+<!-- 										<th> -->
+<!--  											<button type="submit" name="adicionarColuna" class="btn btn-primary"> -->
+<!-- 												<span class="glyphicon glyphicon-plus"></span> Adicionar Coluna -->
+<!--  											</button> -->
+											
+<!-- 											<button type="button" class="btn btn-primary" -->
+<!-- 													data-toggle="modal"	data-target="#columnModal"> -->
+<!-- 													<span class="glyphicon glyphicon-plus"></span> Adicionar Coluna -->
+<!-- 										    </button> -->
+<!-- 										</th> -->
+<!-- 									</tr> -->
+<!-- 								</thead> -->
+	
+<!-- 								<tbody> -->
+<!-- 									<tr th:each="column, columnStat : *{createTableChange.columns}"> -->
+<!-- 										<td th:text="${columnStat.count}"></td> -->
+										
+<!-- 										<td th:text="*{createTableChange.columns[__${columnStat.index}__].name}"></td> -->
+	
+<!-- 										<td th:text="*{createTableChange.columns[__${columnStat.index}__].remarks}"></td> -->
+	
+<!-- 										<td th:text="*{createTableChange.columns[__${columnStat.index}__].type}"></td> -->
+	
+<!-- 										<td><select -->
+<!-- 											th:field="*{rows[__${rowStat.index}__].variety}"> -->
+<!-- 											<option th:each="var : ${allVarieties}" th:value="${var.id}" -->
+<!-- 	 												th:text="${var.name}">Thymus Thymi</option> -->
+<!-- 	 									</select></td> -->
+										
+<!-- 										<td> -->
+<!-- 											<button type="submit" role="button" name="removerColuna" -->
+<!-- 													class="btn btn-danger" th:value="${columnStat.index}"> -->
+<!-- 											  		<span class="glyphicon glyphicon-remove"></span> Remover Coluna -->
+<!-- 											</button> -->
+<!-- 										</td> -->
+<!-- 									</tr> -->
+<!-- 								</tbody> -->
+<!-- 							</table> -->
+<!-- 						</div> -->
+						
+<!-- 						<label>Sequence</label> -->
+<!-- 						<div class="form-group" > -->
+<!-- 						    <label class="control-label col-xs-3" for="sequenceName">Nome</label> -->
+<!-- 						    <div class="col-xs-9"> -->
+<!-- 							    <input type="text" class="form-control" maxlength="30" autofocus="autofocus" -->
+<!-- 							  	       id="sequenceName" name="sequenceName" th:field="*{createSequenceChange.sequenceName}" th:errorclass="fieldError"/> -->
+<!-- 						    </div> -->
+<!-- 						</div> -->
+							
+<!-- 						<div class="form-group"> -->
+<!-- 						    <label class="control-label col-xs-3" for="sequenceSchemaName">Schema</label> -->
+<!-- 						    <div class="col-xs-9"> -->
+<!-- 							    <input type="text" class="form-control" maxlength="30" autofocus="autofocus" required="required" -->
+<!-- 							  	       id="sequenceSchemaName" name="sequenceSchemaName" th:field="*{createSequenceChange.schemaName}" th:errorclass="fieldError"/> -->
+<!-- 						    </div> -->
+<!-- 						</div> -->
+<!-- 					</fieldset> -->
+					
+<!-- 					<div class="form-group"> -->
+<!-- 	            		<div class="col-xs-offset-3 col-xs-9"> -->
+<!-- 							<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+				
+<!-- 			</div> -->
+		</div>
+	</body>
+	
+	<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
+</html>

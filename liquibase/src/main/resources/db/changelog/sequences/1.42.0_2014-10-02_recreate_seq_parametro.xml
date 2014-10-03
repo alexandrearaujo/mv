@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+     http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+      
+    <changeSet id="recreate_sequences_parametro" author="mvfor">
+    	<dropSequence sequenceName="MV_SEQ_PARAMETROS" schemaName="DBAMVFOR"/>
+    	<createSequence sequenceName="MV_SEQ_PARAMETROS" schemaName="DBAMVFOR" cycle="false" startValue="1" incrementBy="1" minValue="1" maxValue="9999999999"/>
+    	
+    	<dropSequence sequenceName="MV_SEQ_GRUPO_PARAMETRO" schemaName="DBAMVFOR"/>
+    	<createSequence sequenceName="MV_SEQ_GRUPO_PARAMETRO" schemaName="DBAMVFOR" cycle="false" startValue="1" incrementBy="1" minValue="1" maxValue="9999999999"/>
+    	
+    	<dropSequence sequenceName="SEQ_OPCAO_PARAMETRO" schemaName="DBAMVFOR"/>
+    	<createSequence sequenceName="SEQ_OPCAO_PARAMETRO" schemaName="DBAMVFOR" cycle="false" startValue="1" incrementBy="1" minValue="1" maxValue="9999999999"/>
+    </changeSet>    
+</databaseChangeLog>
