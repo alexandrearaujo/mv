@@ -1,8 +1,17 @@
 package br.com.mv.liquibase.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import liquibase.exception.LiquibaseException;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +24,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mv.liquibase.model.ColumnConfigLiquibase;
 import br.com.mv.liquibase.model.CreateTableForm;
+import br.com.mv.liquibase.model.GrupoParametro;
+import br.com.mv.liquibase.model.Parametro;
+import br.com.mv.liquibase.service.CreateParametroService;
 import br.com.mv.liquibase.service.CreateTableService;
+import br.com.mv.liquibase.service.LiquibaseDatabaseService;
 import br.com.mv.liquibase.service.ParametroService;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.StreamException;
 
 @Controller
 public class LiquibaseController {
@@ -25,7 +41,13 @@ public class LiquibaseController {
     private CreateTableService createTableService;
 	
 	@Autowired
+	private CreateParametroService createParametroService;
+	
+	@Autowired
 	private ParametroService parametroService;
+	
+	@Autowired
+	private LiquibaseDatabaseService liquibaseDatabaseService;
 	
 	private CreateTableForm createTableForm;
 	
@@ -55,9 +77,43 @@ public class LiquibaseController {
         return modelAndView;
     }
 	
+	public void criarGrupoParametrosXML() throws IOException {
+		createParametroService.criarGrupoParametrosXML();
+	}
+	
+	@RequestMapping("/createParametro")
+    public ModelAndView createParametro() {
+		ModelAndView modelAndView = new ModelAndView("createParametro", "parametro", new Parametro());
+        return modelAndView;
+    }
+	
+	@ModelAttribute("grupoParametros")
+    public List<GrupoParametro> populateGrupoParametros() throws FileNotFoundException {
+		XStream xStream = new XStream();
+        xStream.alias("grupoParametro", GrupoParametro.class);
+        
+        List<GrupoParametro> grupoParametros = null;
+        try
+        {
+        	grupoParametros = (List<GrupoParametro>) xStream.fromXML(new FileInputStream(new File("src/main/resources/grupoParametros.xml")));
+        }
+        catch (StreamException e)
+        {
+        	grupoParametros = new ArrayList<GrupoParametro>();
+        }
+        
+        return grupoParametros;
+    }
+	
 	@RequestMapping("/gerarXmlParametro")
 	public String gerarXmlParametro() {
 		parametroService.gerarXml();
+		return "index";
+	}
+	
+	@RequestMapping("/gerarDocumentacao")
+	public String gerarDocumentacao() throws SQLException, LiquibaseException {
+		liquibaseDatabaseService.testeConexao();
 		return "index";
 	}
 	

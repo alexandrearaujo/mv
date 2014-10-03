@@ -21,6 +21,10 @@
     <include file="db/changelog/deletes/1.42.0_2014-09-26_delete_all_parametros.xml"/>
     
     
+    <!-- recria as sequences de parametro, opção parametro e grupo parametro -->
+    <include file="db/changelog/sequences/1.42.0_2014-10-02_recreate_seq_parametro.xml"/>
+    
+    
 	<!-- cria os parametros, opção parametro e grupo parametros -->
     <include file="db/changelog/inserts/1.42.0_2014-09-29_create_parametros.xml"/>
     

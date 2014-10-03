@@ -232,13 +232,11 @@ public class ParametroService {
 		}
 		
 		
-		try (OutputStream os = new FileOutputStream("src/main/resources/db/changelog/inserts/" + Versao.ATUAL + "_" + LocalDate.now()  + "_create_parametros.xml")) {
+		try (OutputStream os = new FileOutputStream("src/main/resources/db/changelog/inserts/" + Versao.getVersaoAtual() + "_" + LocalDate.now() + "_create_parametros.xml")) {
 			XMLChangeLogSerializer xmlChangeLogSerializer = new XMLChangeLogSerializer();
 			xmlChangeLogSerializer.write(listChangeSet, os);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
-	
 }

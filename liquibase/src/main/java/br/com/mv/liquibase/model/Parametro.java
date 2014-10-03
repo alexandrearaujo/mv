@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,9 +23,7 @@ import javax.persistence.Table;
 @Table(name = "mv_parametro")
 public class Parametro implements Serializable
 {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8033407554336414026L;
 
 	@Id
@@ -70,7 +67,7 @@ public class Parametro implements Serializable
 	@Column(name = "DS_OBJETIVO", length = 4000)
 	private String descricaoObjetivo;
 	
-	@OneToMany(mappedBy="parametro",fetch=FetchType.LAZY, cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(mappedBy="parametro", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Collection<OpcaoParametro> opcoesParametros;
 
 	public String getDescricao()
