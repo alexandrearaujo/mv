@@ -6,8 +6,8 @@
 	<parent>
 		<groupId>io.spring.platform</groupId>
 		<artifactId>platform-bom</artifactId>
-		<version>1.0.2.RELEASE</version>
-		<relativePath />
+		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<groupId>br.com.mv</groupId>
@@ -16,8 +16,15 @@
 	<version>1.0.0-SNAPSHOT</version>
 <!-- 	<packaging>war</packaging> -->
 
+	<scm>
+		<connection>scm:git:https://github.com/alexandrearaujo/mv</connection>
+		<url>https://github.com/alexandrearaujo/mv</url>
+	</scm>
+
 	<properties>
 		<java.version>1.8</java.version>
+		<tomcat.version>8.0.14</tomcat.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<liquibase.version>3.3.0-SNAPSHOT</liquibase.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>br.com.mv.liquibase.Application</start-class>
@@ -70,8 +77,8 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -79,7 +86,7 @@
 		  <artifactId>xstream</artifactId>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -88,4 +95,20 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/libs-snapshot</url>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/libs-snapshot</url>
+            <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
