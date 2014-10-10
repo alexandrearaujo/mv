@@ -29,7 +29,7 @@ import com.thoughtworks.xstream.io.StreamException;
 public class CreateParametroController {
 	
 	@Autowired
-	private CreateParametroService createParametroService;
+	private CreateParametroService createParametroService; 
 	
 	private CreateParametroForm createParametroForm;
 	
