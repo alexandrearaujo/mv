@@ -93,41 +93,43 @@
 				        </div>
 				    </div>
 				    
-					<div class="table-responsive">
-						<table class="table table-condensed table-bordered table-striped table-hover">
-							<caption>Opção Parametro</caption>
-							<thead>
-								<tr class="info">
-									<th>#</th>
-									<th>Ativo</th>
-									<th>Descrição</th>
-									<th>
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOpcaoParametroModal">
-											<span class="glyphicon glyphicon-plus"></span> Adicionar Opção Parametro
-									    </button>
-									</th>
-								</tr>
-							</thead>
-	
-							<tbody>
-								<tr th:each="column, columnStat : *{parametro.opcoesParametros}">
-									<td th:text="${columnStat.count}"></td>
-									
-									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].flagAtivo}"></td>
-	
-									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
-									
-									<td>
-										<button type="submit" role="button" name="removerOpcaoParametro"
-												class="btn btn-danger" th:value="${column}">
-										  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-						
+				    <fieldset>
+						<legend>Opção Parametro</legend>
+						<div class="table-responsive">
+							<table class="table table-condensed table-bordered table-striped table-hover">
+								<thead>
+									<tr class="info">
+										<th>#</th>
+										<th>Ativo</th>
+										<th>Descrição</th>
+										<th>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOpcaoParametroModal">
+												<span class="glyphicon glyphicon-plus"></span> Adicionar Opção Parametro
+										    </button>
+										</th>
+									</tr>
+								</thead>
+		
+								<tbody>
+									<tr th:each="column, columnStat : *{parametro.opcoesParametros}">
+										<td th:text="${columnStat.count}"></td>
+										
+										<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].flagAtivo}"></td>
+		
+										<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
+										
+										<td>
+											<button type="submit" role="button" name="indexOpcaoParametro"
+													class="btn btn-danger" th:value="${columnStat.index}">
+											  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+					
 					<div class="form-group">
 		           		<div class="col-xs-offset-3 col-xs-9">
 							<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button>

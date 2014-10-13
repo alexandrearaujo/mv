@@ -80,8 +80,8 @@ public class CreateParametroController {
 	@RequestMapping(value="/createParametro", params={"removerOpcaoParametro"})
     public ModelAndView removerColuna(@ModelAttribute("createParametroForm") CreateParametroForm createParametroForm,
     		final BindingResult bindingResult, final HttpServletRequest req) {
-        final Integer rowId = Integer.valueOf(req.getParameter("column"));
-        createParametroForm.getParametro().getOpcoesParametros().remove(rowId);
+        final Integer rowId = Integer.valueOf(req.getParameter("indexOpcaoParametro"));
+        createParametroForm.getParametro().getOpcoesParametros().remove(rowId.intValue());
         
         ModelAndView modelAndView = new ModelAndView("createParametro", "createParametroForm", createParametroForm);
         
