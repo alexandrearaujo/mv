@@ -14,17 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- * @author Moesio Medeiros
- * @date Thu Oct 30 16:12:09 GMT-03:00 2008
- */
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "MV_GRUPO_PARAMETRO")
-public class GrupoParametro implements Serializable
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class GrupoParametro implements Serializable
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1151478368823472217L;
 
 	@Id
@@ -38,35 +36,5 @@ public class GrupoParametro implements Serializable
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "grupoParametro", targetEntity = Parametro.class, fetch = FetchType.LAZY)
     private Collection<Parametro> parametros;
-
-    public Long getId()
-    {
-        return this.id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public String getDescricao()
-    {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao)
-    {
-        this.descricao = descricao;
-    }
-
-    public Collection<Parametro> getParametros()
-    {
-        return parametros;
-    }
-
-    public void setParametros(Collection<Parametro> parametros)
-    {
-        this.parametros = parametros;
-    }
 
 }

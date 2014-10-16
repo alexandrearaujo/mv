@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mv.liquibase.model.CreateParametroForm;
@@ -34,7 +37,7 @@ public class CreateParametroController {
 	private CreateParametroForm createParametroForm;
 	
 	
-	@RequestMapping("/createParametro")
+	@RequestMapping(value = "/createParametro", method = RequestMethod.GET)
     public ModelAndView createParametro() {
 		createParametroForm = new CreateParametroForm();
 		createParametroForm.setOpcaoParametro(new OpcaoParametro());
@@ -68,8 +71,9 @@ public class CreateParametroController {
 		createParametroService.criarGrupoParametrosXML();
 	}
 	
-	@RequestMapping(value="/createParametro", params={"adicionarOpcaoParametro"})
-    public ModelAndView adicionarOpcaoParametro(@ModelAttribute("createParametroForm") CreateParametroForm createParametroForm, final BindingResult bindingResult) {
+	@RequestMapping(value = {"/createParametro"}, params = {"adicionarOpcaoParametro"})
+    public ModelAndView adicionarOpcaoParametro(@ModelAttribute("createParametroForm") CreateParametroForm createParametroForm,
+    	    final BindingResult bindingResult) {
 		createParametroForm.getParametro().getOpcoesParametros().add(createParametroForm.getOpcaoParametro());
 		ModelAndView modelAndView = new ModelAndView("createParametro", "createParametroForm", createParametroForm);
 		createParametroForm.setOpcaoParametro(new OpcaoParametro());
@@ -77,7 +81,7 @@ public class CreateParametroController {
         return modelAndView;
     }
 
-	@RequestMapping(value="/createParametro", params={"removerOpcaoParametro"})
+	@RequestMapping(value="/createParametro", params = {"removerOpcaoParametro"})
     public ModelAndView removerColuna(@ModelAttribute("createParametroForm") CreateParametroForm createParametroForm,
     		final BindingResult bindingResult, final HttpServletRequest req) {
         final Integer rowId = Integer.valueOf(req.getParameter("indexOpcaoParametro"));
@@ -86,6 +90,18 @@ public class CreateParametroController {
         ModelAndView modelAndView = new ModelAndView("createParametro", "createParametroForm", createParametroForm);
         
         return modelAndView;
+    }
+	
+	@RequestMapping(value = "/createParametro", params = {"salvar"}, method = RequestMethod.POST)
+    public String salvar(@Valid @ModelAttribute("createParametroForm") CreateParametroForm createParametroForm,
+    		final BindingResult bindingResult, final ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            return "createParametro";
+        }
+        
+        createParametroService.salvar(createParametroForm);
+        model.clear();
+        return "redirect:/createParametro";
     }
 
 	@ModelAttribute("createParametroForm")

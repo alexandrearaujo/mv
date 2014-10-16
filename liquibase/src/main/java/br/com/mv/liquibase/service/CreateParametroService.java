@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.mv.liquibase.model.CreateParametroForm;
 import br.com.mv.liquibase.model.GrupoParametro;
 import br.com.mv.liquibase.repository.GrupoParametroRepository;
 
@@ -40,4 +41,10 @@ public class CreateParametroService {
         xStream.alias("grupoParametro", GrupoParametro.class);
         xStream.toXML(grupoParametros, outputStream);
     }
+
+
+	public void salvar(CreateParametroForm createParametroForm) {
+		// TODO Auto-generated method stub
+		
+	}
 }

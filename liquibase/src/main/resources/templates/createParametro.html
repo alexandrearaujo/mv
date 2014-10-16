@@ -5,140 +5,174 @@
 	<body role="document">
 		<div th:replace="fragments/layout :: navbar">(navbar)</div>
 	
-		<div class="container">
-			<div class="container-fluid">
-				<form class="form-horizontal" action="#" th:action="@{/createParametro}" th:object="${createParametroForm}" th:method="post">
-					<fieldset>
-						<legend>Parametro</legend>
-						
-						<div class="form-group">
-						    <label class="control-label col-xs-3" for="chave">Chave</label>
-						    <div class="col-xs-9">
-							    <input type="text" class="form-control" maxlength="50" autofocus="autofocus"
-							  	       id="chave" th:field="*{parametro.chave}" th:errorclass="error"/>
-						    </div>
-						</div>
-						
-						<div class="form-group">
-						    <label class="control-label col-xs-3" for="valor">Valor</label>
-						    <div class="col-xs-9">
-							    <input type="text" class="form-control" id="valor" name="valor" th:field="*{parametro.valor}"
-							    	   maxlength="300" th:errorclass="error"/>  
-						    </div>
-						</div>
-						
-						<div class="form-group">
-						    <label class="control-label col-xs-3" for="remarks">Descrição</label>
-						    <div class="col-xs-9">
-							    <textarea rows="2" class="form-control" id="descricao" name="descricao" th:field="*{parametro.descricao}"
-							    	   maxlength="200"></textarea>  
-						    </div>
-						</div>
-						
-						<div class="form-group">
-						    <label class="control-label col-xs-3" for="remarks">Descrição do Objetivo</label>
-						    <div class="col-xs-9">
-							    <textarea rows="4" class="form-control" id="descricaoObjetivo" name="descricaoObjetivo"
-							    	      th:field="*{parametro.descricaoObjetivo}" maxlength="4000"></textarea>  
-						    </div>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label col-xs-3" for="grupoParametro">Grupo Parametro</label>
-							<div class="col-xs-9">
-								<select	th:field="*{parametro.grupoParametro}" class="form-control" id="grupoParametro">
-									<option th:each="grupoParametro : ${grupoParametros}" th:value="${grupoParametro.id}"
-										    th:text="${grupoParametro.descricao}"></option>
-								</select>
-							</div>
-						</div>
-					</fieldset>
-				
-
-				    <div id="addOpcaoParametroModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addOpcaoParametroModalLabel" aria-hidden="true">
-				        <div class="modal-dialog modal-lg">
-				            <div class="modal-content">
-				                <div class="modal-header">
-				                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				                    <h4 class="modal-title" id="addOpcaoParametroModalLabel">Adicionar Opção Parametro</h4>
-				                </div>
-				                
-				                <div class="modal-body">
-									<div class="form-group">
-										<div class="col-xs-offset-3 col-xs-9">
-							                <label class="checkbox-inline">
-							                    <input type="checkbox" id="ativo" th:field="*{opcaoParametro.flagAtivo}"/>
-							                     Ativo?
-							                </label>
-							            </div>
-									</div>
-	
-							        <div class="form-group">
-						                <label class="control-label col-xs-3" for="descricaoOpcaoParametro">
-						                Descrição
-						                </label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="descricaoOpcaoParametro"
-												   th:field="*{opcaoParametro.descricaoOpcaoParametro}" maxlength="200"
-												   th:errorclass="fieldError"/>
-									    </div>
-							        </div>
-				                </div>
-				                
-				                <div class="modal-footer">
-				                    <button type="submit" name="adicionarOpcaoParametro" class="btn btn-primary">OK</button>
-				                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				                </div>
-				            </div>
-				        </div>
-				    </div>
-				    
-				    <fieldset>
-						<legend>Opção Parametro</legend>
-						<div class="table-responsive">
-							<table class="table table-condensed table-bordered table-striped table-hover">
-								<thead>
-									<tr class="info">
-										<th>#</th>
-										<th>Ativo</th>
-										<th>Descrição</th>
-										<th>
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOpcaoParametroModal">
-												<span class="glyphicon glyphicon-plus"></span> Adicionar Opção Parametro
-										    </button>
-										</th>
-									</tr>
-								</thead>
-		
-								<tbody>
-									<tr th:each="column, columnStat : *{parametro.opcoesParametros}">
-										<td th:text="${columnStat.count}"></td>
-										
-										<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].flagAtivo}"></td>
-		
-										<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
-										
-										<td>
-											<button type="submit" role="button" name="indexOpcaoParametro"
-													class="btn btn-danger" th:value="${columnStat.index}">
-											  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
-											</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</fieldset>
+		<div class="container-fluid">
+			<div class="row-fluid row-content"> 
+	            <!-- Breadcrumb -->
+	            <ul class="breadcrumb">
+	              <li><a href="#">Home</a> <span class="divider"></span></li>
+	              <li>Criar <span class="divider"></span></li>
+	              <li class="active">Parametro</li>
+           		</ul>
+       		</div>
+         		
+			<form id="parametroForm" class="form-horizontal" action="#" th:action="@{/createParametro}"
+				  th:object="${createParametroForm}" th:method="post"
+				  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
+				  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+				  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+				<fieldset>
+					<legend>Parametro</legend>
 					
 					<div class="form-group">
-		           		<div class="col-xs-offset-3 col-xs-9">
-							<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button>
+					    <label class="control-label col-xs-3" for="chave">Chave <span>*</span></label>
+					    <div class="col-xs-9">
+						    <input type="text" class="form-control" maxlength="50" autofocus="autofocus"
+						  	       id="chave" th:field="*{parametro.chave}" data-bv-notempty="true"/>
+					    </div>
+					</div>
+					
+					<div class="form-group">
+					    <label class="control-label col-xs-3" for="valor">Valor <span>*</span></label>
+					    <div class="col-xs-9">
+						    <input type="text" class="form-control" id="valor" name="valor" th:field="*{parametro.valor}"
+						    	   maxlength="300" data-bv-notempty="true"/>  
+					    </div>
+					</div>
+					
+					<div class="form-group">
+					    <label class="control-label col-xs-3" for="remarks">Descrição <span>*</span></label>
+					    <div class="col-xs-9">
+						    <textarea rows="2" class="form-control" id="descricao" name="descricao" th:field="*{parametro.descricao}"
+						    	   maxlength="200" data-bv-notempty="true"></textarea>  
+					    </div>
+					</div>
+					
+					<div class="form-group">
+					    <label class="control-label col-xs-3" for="remarks">Descrição do Objetivo</label>
+					    <div class="col-xs-9">
+						    <textarea rows="4" class="form-control" id="descricaoObjetivo" name="descricaoObjetivo"
+						    	      th:field="*{parametro.descricaoObjetivo}" maxlength="4000"></textarea>  
+					    </div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-xs-3" for="grupoParametro">Grupo Parametro <span>*</span></label>
+						<div class="col-xs-9">
+							<select	th:field="*{parametro.grupoParametro}" class="form-control" id="grupoParametro" data-bv-notempty="true">
+								<option th:each="grupoParametro : ${grupoParametros}" th:value="${grupoParametro.id}"
+									    th:text="${grupoParametro.descricao}"></option>
+							</select>
 						</div>
 					</div>
-				</form>
-			</div>
+				</fieldset>
+			
+			    <fieldset>
+					<legend>Opção Parametro</legend>
+					<div class="table-responsive">
+						<table class="table table-condensed table-bordered table-striped table-hover">
+							<thead>
+								<tr class="info">
+									<th>#</th>
+									<th>Ativo</th>
+									<th>Descrição</th>
+									<th>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOpcaoParametroModal">
+											<span class="glyphicon glyphicon-plus"></span> Adicionar Opção Parametro
+									    </button>
+									</th>
+								</tr>
+							</thead>
+	
+							<tbody>
+								<tr th:each="column, columnStat : *{parametro.opcoesParametros}">
+									<td th:text="${columnStat.count}"></td>
+									
+									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].flagAtivo}"></td>
+	
+									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
+									
+									<td>
+										<button type="button" th:re name="removerOpcaoParametro"
+												class="btn btn-danger" th:value="${columnStat.index}">
+										  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+				
+				<div class="form-group">
+	           		<div class="col-xs-offset-3 col-xs-9">
+						<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button>
+					</div>
+				</div>
+			</form>
+			
+			<div id="addOpcaoParametroModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addOpcaoParametroModalLabel"
+		    	 aria-hidden="true">
+		        <div class="modal-dialog modal-lg">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                    <h4 class="modal-title" id="addOpcaoParametroModalLabel">Adicionar Opção Parametro</h4>
+		                </div>
+		                
+		                <div class="modal-body">
+		                	<form id="opcaoParametroForm" method="post" class="form-horizontal"
+		                		  th:object="${createParametroForm}" th:action="@{/createParametro}"
+		                		  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
+			  					  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+			  					  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+								<div class="form-group">
+									<div class="col-xs-offset-3 col-xs-9">
+						                <label class="checkbox-inline">
+						                    <input type="checkbox" id="ativo" th:field="*{opcaoParametro.flagAtivo}"/>
+						                     Ativo?
+						                </label>
+						            </div>
+								</div>
+
+						        <div class="form-group">
+					                <label class="control-label col-xs-3" for="descricaoOpcaoParametro">
+					                Descrição <span>*</span>
+					                </label>
+								    <div class="col-xs-9">
+									    <input type="text" class="form-control" id="descricaoOpcaoParametro"
+											   th:field="*{opcaoParametro.descricaoOpcaoParametro}" maxlength="200"
+											   data-bv-notempty="true"/>
+								    </div>
+						        </div>
+						        
+				                <div class="form-group">
+				                	<div class="col-xs-offset-3 col-xs-9">
+					                    <button type="submit" name="adicionarOpcaoParametro" class="btn btn-primary" role="button">OK</button>
+					                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				                	</div>
+				                </div>
+		                	</form>
+		                </div>
+		                
+		            </div>
+		        </div>
+		    </div>
 		</div>
 	</body>
 	
 	<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
+	
+	<script>
+		$(document).ready(function() {
+		    $('#parametroForm').bootstrapValidator({
+		    	
+		    });
+		});
+		
+		$(document).ready(function() {
+		    $('#opcaoParametroForm').bootstrapValidator({
+// 		        excluded: [':disabled'],
+		    });
+		});
+	</script>
 </html>

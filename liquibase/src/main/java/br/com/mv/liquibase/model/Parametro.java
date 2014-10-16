@@ -1,7 +1,7 @@
 package br.com.mv.liquibase.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,16 +15,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-/**
- * @author Moesio Medeiros Date: 28/02/2008 08:32:13
- */
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "mv_parametro")
-public class Parametro implements Serializable
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class Parametro implements Serializable
 {
-	
-	private static final long serialVersionUID = 8033407554336414026L;
+	private static final long serialVersionUID = 1962151124769372760L;
 
 	@Id
 	@SequenceGenerator(name = "MV_SEQ_PARAMETROS", sequenceName = "MV_SEQ_PARAMETROS", allocationSize = 0)
@@ -32,12 +35,18 @@ public class Parametro implements Serializable
 	@Column(name = "ID")
 	private Long id;
 
+	@NotNull
+	@Size(max=50)
 	@Column(name = "CHAVE", nullable = false, length = 50)
 	private String chave;
 
+	@Size(max=200)
+	@NotNull
 	@Column(name = "DESCRICAO", nullable = false, length = 200)
 	private String descricao;
 
+	@NotNull
+	@Size(max=300)
 	@Column(name = "VALOR", nullable = false, length = 300)
 	private String valor;
 
@@ -68,133 +77,6 @@ public class Parametro implements Serializable
 	private String descricaoObjetivo;
 	
 	@OneToMany(mappedBy="parametro", cascade=CascadeType.ALL, orphanRemoval=true)
-	private Collection<OpcaoParametro> opcoesParametros;
-
-	public String getDescricao()
-	{
-		return descricao;
-	}
-
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
-	}
-
-	public String getValor()
-	{
-		return valor;
-	}
-
-	public void setValor(String valor)
-	{
-		this.valor = valor;
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public String getChave()
-	{
-		return chave;
-	}
-
-	public void setChave(String chave)
-	{
-		this.chave = chave;
-	}
-
-	public GrupoParametro getGrupoParametro()
-	{
-		return grupoParametro;
-	}
-
-	public void setGrupoParametro(GrupoParametro grupoParametro)
-	{
-		this.grupoParametro = grupoParametro;
-	}
-
-	public Boolean getTipoObrigatorio()
-	{
-		return tipoObrigatorio;
-	}
-
-	public void setTipoObrigatorio(Boolean obrigatorio)
-	{
-		this.tipoObrigatorio = obrigatorio;
-	}
-
-	public Long getTipoParametro()
-    {
-        return tipoParametro;
-    }
-
-    public void setTipoParametro(Long tipoParametro)
-    {
-        this.tipoParametro = tipoParametro;
-    }
-
-    public String getTela()
-	{
-		return tela;
-	}
-
-	public void setTela(String tela)
-	{
-		this.tela = tela;
-	}
-
-	public String getTipoMimeArquivo()
-	{
-		return tipoMimeArquivo;
-	}
-
-	public void setTipoMimeArquivo(String tipoMimeArquivo)
-	{
-		this.tipoMimeArquivo = tipoMimeArquivo;
-	}
-
-	public String getNomeArquivo()
-	{
-		return nomeArquivo;
-	}
-
-	public void setNomeArquivo(String nomeArquivo)
-	{
-		this.nomeArquivo = nomeArquivo;
-	}
-
-	public byte[] getArquivo()
-	{
-		return arquivo;
-	}
-
-	public Collection<OpcaoParametro> getOpcoesParametros()
-    {
-        return opcoesParametros;
-    }
-
-    public void setOpcoesParametros(Collection<OpcaoParametro> opcoesParametros)
-    {
-        this.opcoesParametros = opcoesParametros;
-    }
-    
-    public String getDescricaoObjetivo() {
-	return descricaoObjetivo;
-    }
-
-    public void setDescricaoObjetivo(String descricaoObjetivo) {
-	this.descricaoObjetivo = descricaoObjetivo;
-    }
-
-	public void setArquivo(byte[] arquivo)
-	{
-		this.arquivo = arquivo;
-	}
+	private List<OpcaoParametro> opcoesParametros;
+	
 }
