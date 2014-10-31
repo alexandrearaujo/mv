@@ -92,10 +92,9 @@
 									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
 									
 									<td>
-										<button type="button" th:re name="removerOpcaoParametro"
-												class="btn btn-danger" th:value="${columnStat.index}">
-										  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
-										</button>
+										<a th:href="@{|/createParametro/removerOpcaoParametro/${columnStat.index}|}" class="btn btn-danger" type="button">
+									  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
+										</a>
 									</td>
 								</tr>
 							</tbody>
@@ -120,8 +119,9 @@
 		                </div>
 		                
 		                <div class="modal-body">
-		                	<form id="opcaoParametroForm" method="post" class="form-horizontal"
-		                		  th:object="${createParametroForm}" th:action="@{/createParametro}"
+		                	<form id="opcaoParametroForm" class="form-horizontal"
+		                		  th:object="${createParametroForm}"
+		                		  th:action="@{/createParametro/adicionarOpcaoParametro}"
 		                		  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
 			  					  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 			  					  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
@@ -147,7 +147,7 @@
 						        
 				                <div class="form-group">
 				                	<div class="col-xs-offset-3 col-xs-9">
-					                    <button type="submit" name="adicionarOpcaoParametro" class="btn btn-primary" role="button">OK</button>
+					                    <button type="submit" class="btn btn-primary" role="button" name="adicionarOpcaoParametro">OK</button>
 					                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 				                	</div>
 				                </div>
