@@ -15,39 +15,56 @@
            		</ul>
        		</div>
          		
-			<form class="form-horizontal" action="#" th:action="@{/createTable}" th:object="${createTableForm}" th:method="post">
+			<form class="form-horizontal" action="#" th:action="@{/createTable}" th:object="${createTableForm}" th:method="post" id="tableForm">
 				<fieldset>
 					<legend>Tabela</legend>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="tableName">Nome <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" maxlength="30" autofocus="autofocus"
-						  	       id="tableName" th:field="*{createTableChange.tableName}" th:errorclass="error"/>
-					    </div>
+<!-- 					<div class="form-group"> -->
+<!-- 					    <label class="control-label col-xs-3" for="tableName">Nome <span>*</span></label> -->
+<!-- 					    <div class="col-xs-9"> -->
+<!-- 						    <input type="text" class="form-control" maxlength="30" autofocus="autofocus" -->
+<!-- 						  	       id="tableName" th:field="*{createTableChange.tableName}"/> -->
+<!-- 					    </div> -->
+<!-- 					</div> -->
+					
+					<div th:include="fragments/layout :: text-field"
+					     th:with="name='tableName', label=#{tableName}, field=createTableChange.tableName, requiredSymbol=true, maxLength=30, autofocus='autofocus'">
 					</div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="remarks">Comentário</label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="remarks" name="remarks" th:field="*{createTableChange.remarks}"/>  
-					    </div>
+<!-- 					<div class="form-group"> -->
+<!-- 					    <label class="control-label col-xs-3" for="remarks">Comentário</label> -->
+<!-- 					    <div class="col-xs-9"> -->
+<!-- 						    <input type="text" class="form-control" id="remarks" name="remarks" th:field="*{createTableChange.remarks}"/>   -->
+<!-- 					    </div> -->
+<!-- 					</div> -->
+					
+					<div th:include="fragments/layout :: text-field"
+					     th:with="name='remarks', label=#{comentario}, field=createTableChange.remarks">
 					</div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="schemaName">Schema <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="schemaName" name="schemaName"
-						    	   th:field="*{createTableChange.schemaName}"/>
-					    </div>
+					
+<!-- 					<div class="form-group"> -->
+<!-- 					    <label class="control-label col-xs-3" for="schemaName">Schema <span>*</span></label> -->
+<!-- 					    <div class="col-xs-9"> -->
+<!-- 						    <input type="text" class="form-control" id="schemaName" name="schemaName" -->
+<!-- 						    	   th:field="*{createTableChange.schemaName}"/> -->
+<!-- 					    </div> -->
+<!-- 					</div> -->
+					
+					<div th:include="fragments/layout :: text-field"
+					     th:with="name='schemaName', label=#{schema}, field=createTableChange.schemaName, requiredSymbol=true">
 					</div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="tablespace">Table Space <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="tablespace" name="tablespace"
-						    	   th:field="*{createTableChange.tablespace}"/>
-					    </div>
+<!-- 					<div class="form-group"> -->
+<!-- 					    <label class="control-label col-xs-3" for="tablespace">Table Space <span>*</span></label> -->
+<!-- 					    <div class="col-xs-9"> -->
+<!-- 						    <input type="text" class="form-control" id="tablespace" name="tablespace" -->
+<!-- 						    	   th:field="*{createTableChange.tablespace}"/> -->
+<!-- 					    </div> -->
+<!-- 					</div> -->
+					
+					<div th:include="fragments/layout :: text-field"
+					     th:with="name='tablespace', label=#{tablespace}, field=createTableChange.tablespace, requiredSymbol=true">
 					</div>
 
 				    <div id="columnModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="columnModalLabel"
@@ -246,17 +263,11 @@
 					</div>
 				</fieldset>
 				
-				<div class="form-group">
-            		<div class="col-xs-offset-3 col-xs-9">
-						<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button>
-					</div>
-				</div>
-				
 				<div class="form-group form-actions">
 					<div class="col-xs-offset-3 col-xs-9">
-	                	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-	                    <button type="reset" class="btn"><span class="glyphicon glyphicon-refresh"></span> Limpar</button>
-	                	<button type="button" class="btn" onclick="history.back(1)"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+	                	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
+	                    <button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Limpar</button>
+	                	<button type="button" class="btn btn-danger" onclick="history.back(1)"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
                 	</div>
                 </div>
 			</form>
@@ -264,4 +275,12 @@
 	</body>
 	
 	<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
+	
+	<script>
+		$(document).ready(function() {
+		    $('#tableForm').bootstrapValidator({
+		    	
+		    });
+		});
+	</script>
 </html>

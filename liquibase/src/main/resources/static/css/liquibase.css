@@ -25,33 +25,10 @@ body {
 	text-align: center;
 }
 
-/* .form-control.error { */
-/*     border: 1px solid red; */
-/* } */
-
-/* ul.errorlist { */
-/*     border: 1px dotted #333; */
-/*     margin: 10px 10px 50px 10px; */
-/*     padding: 10px; */
-/* } */
-
-/* ul.errorlist li { */
-/*     list-style: none; */
-/*     background-color: #f2d768; */
-/*     padding: 5px; */
-/*     margin: 3px 0px; */
-/* } */
-
-/* .form-control:invalid { */
-/*   border: 1px solid #cc0000; */
-  
-/* } */
-
-.control-label span {
+.span-red {
 	color: #e33636; 
 	font-weight: bold;
 }
-
 
 .form-actions {
   padding: 5px 5px 5px;
