@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.spring.platform</groupId>
 		<artifactId>platform-bom</artifactId>
-		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<version>LATEST</version>
 		<relativePath/>
 	</parent>
 
@@ -23,10 +23,11 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<tomcat.version>8.0.14</tomcat.version>
-		<commons-lang3.version>3.3.2</commons-lang3.version>
-		<liquibase.version>3.4.0-SNAPSHOT</liquibase.version>
-		<lombok.version>1.14.8</lombok.version>
+		<tomcat.version>LATEST</tomcat.version>
+		<commons-lang3.version>LATEST</commons-lang3.version>
+		<liquibase.version>LATEST</liquibase.version>
+		<thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
+		<lombok.version>LATEST</lombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>br.com.mv.liquibase.Application</start-class>
 		<main.basedir>${basedir}/../..</main.basedir>
@@ -42,6 +43,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-log4j2</artifactId> -->
+<!-- 		</dependency> -->
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.flywaydb</groupId> -->
@@ -56,7 +62,7 @@
 		<dependency>
 			<groupId>org.liquibase.ext</groupId>
 			<artifactId>liquibase-oracle</artifactId>
-			<version>3.1</version>
+			<version>LATEST</version>
 		</dependency>
 
 		<dependency>
@@ -99,18 +105,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+			        <dependency>
+			            <groupId>org.springframework</groupId>
+			            <artifactId>springloaded</artifactId>
+			            <version>LATEST</version>
+			        </dependency>
+			    </dependencies>
 			</plugin>
 			
-			<plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>versions-maven-plugin</artifactId>
-		        <goals>
-		        	<goal>
-		        		use-latest-versions
-		        	</goal>
-		        </goals>
+<!-- 			<plugin> -->
+<!-- 		        <groupId>org.codehaus.mojo</groupId> -->
+<!-- 		        <artifactId>versions-maven-plugin</artifactId> -->
+<!-- 		        <goals> -->
+<!-- 		        	<goal> -->
+<!-- 		        		use-latest-versions -->
+<!-- 		        	</goal> -->
+<!-- 		        </goals> -->
 		        
-		      </plugin>
+<!-- 		      </plugin> -->
 		</plugins>
 	</build>
 	

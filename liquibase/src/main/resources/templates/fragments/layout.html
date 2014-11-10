@@ -75,9 +75,55 @@
 				
 				<div class="col-xs-9">
 					<input type="text" class="form-control" th:id-name="__${name}__" th:field="*{__${field}__}" th:maxlength="${maxLength}"
-						   th:autofocus="${autofocus}" th:attr="data-bv-notempty=${required}"/> 
+						   th:autofocus="${autofocus}" th:attr="data-bv-notempty=${required}" th:placeholder="${placeholder}"/> 
 				</div>
 			</div>
+		</div>
+		
+		<div th:fragment="checkbox-field">
+			<div class="form-group">
+				<div class="col-xs-offset-3 col-xs-9">
+	                <label class="checkbox-inline">
+	                    <input type="checkbox" th:id-name="__${name}__" th:field="*{__${field}__}"/>
+	                    <span th:text="${label}"></span>
+	                </label>
+	            </div>
+			</div>
+		</div>
+		
+		<div th:fragment="group-button">
+			<div class="form-group form-actions">
+				<div class="col-xs-offset-3 col-xs-9">
+	              	<button type="submit" class="btn btn-success">
+	              		<span class="glyphicon glyphicon-ok"></span>
+	              		<span th:text="#{confirmar}"></span> 
+	              	</button>
+	              	
+	                <button type="reset" class="btn btn-warning">
+	                	<span class="glyphicon glyphicon-refresh"></span>
+	                	<span th:text="#{limpar}"></span> 
+	                </button>
+	                
+	              	<button type="button" class="btn btn-danger" onclick="history.back(1)">
+	              		<span class="glyphicon glyphicon-ban-circle"></span>
+	              		<span th:text="#{cancelar}"></span> 
+	              	</button>
+	          	</div>
+	        </div>
+		</div>
+		
+		<div th:fragment="modal-group-button-footer">
+			<div class="modal-footer">
+                <button type="submit" th:name="#{name}" class="btn btn-success">
+                	<span class="glyphicon glyphicon-ok"></span>
+	              	<span th:text="OK"></span> 
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+             		<span class="glyphicon glyphicon-ban-circle"></span>
+             		<span th:text="#{cancelar}"></span> 
+             	</button>
+            </div>
 		</div>
 		
 		<!-- Footer -->
