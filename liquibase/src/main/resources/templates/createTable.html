@@ -15,59 +15,20 @@
            		</ul>
        		</div>
          		
-			<form class="form-horizontal" action="#" th:action="@{/createTable}" th:object="${createTableForm}" th:method="post" id="tableForm">
+			<form class="form-horizontal" action="#" th:action="@{/createTable}" th:object="${createTableForm}" th:method="post" id="tableForm"
+				  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
+				  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+				  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 				<fieldset>
 					<legend>Tabela</legend>
-					<!--/*-->
-					Comentado
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="tableName">Nome <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" maxlength="30" autofocus="autofocus"
-						  	       id="tableName" th:field="*{createTableChange.tableName}"/>
-					    </div>
-					</div>
-					<!--*/-->
+					<div th:replace="fragments/layout :: text-field(name='tableName', label=#{tableName},
+									 field=createTableChange.tableName, required=true, maxLength=30, autofocus=true)"></div>
 					
-					<div th:include="fragments/layout :: text-field(name='tableName', label=#{tableName}, field=createTableChange.tableName, required=true, maxLength=30, autofocus=true)">
-					</div>
+					<div th:replace="fragments/layout :: text-field(name='remarks', label=#{comentario}, field=createTableChange.remarks, required=true)"></div>
 					
-					<!--/*
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="remarks">Comentário</label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="remarks" name="remarks" th:field="*{createTableChange.remarks}"/>  
-					    </div>
-					</div>
-					*/-->
+					<div th:replace="fragments/layout :: text-field(name='schemaName', label=#{schema}, field=createTableChange.schemaName, required=true)"></div>
 					
-					<div th:include="fragments/layout :: text-field(name='remarks', label=#{comentario}, field=createTableChange.remarks)">
-					</div>
-					
-					<!--/*
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="schemaName">Schema <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="schemaName" name="schemaName"
-						    	   th:field="*{createTableChange.schemaName}"/>
-					    </div>
-					</div>
-					*/-->
-					
-					<div th:include="fragments/layout :: text-field(name='schemaName', label=#{schema}, field=createTableChange.schemaName, required=true)">
-					</div>
-					
-					<!--/*
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="tablespace">Table Space <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="tablespace" name="tablespace"
-						    	   th:field="*{createTableChange.tablespace}"/>
-					    </div>
-					</div>
-					*/-->
-					<div th:include="fragments/layout :: text-field(name='tablespace', label=#{tablespace}, field=createTableChange.tablespace, required=true)">
-					</div>
+					<div th:replace="fragments/layout :: text-field(name='tablespace', label=#{tablespace}, field=createTableChange.tablespace, required=true)"></div>
 
 				    <div id="columnModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="columnModalLabel" aria-hidden="true">
 				        <div class="modal-dialog modal-lg">
@@ -78,172 +39,39 @@
 				                </div>
 				                
 				                <div class="modal-body">
-				                	<!--/*
-				                    <div class="form-group">
-									    <label class="control-label col-xs-3" for="columnName">Nome <span>*</span></label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" maxlength="30" autofocus="autofocus"
-										  	       id="columnName" th:field="*{columnConfig.name}"/>
-									    </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: text-field(name='columnName', label=#{name}, field=columnConfig.name, required=true, maxLength=30, autofocus=true)">
-									</div>
+									<div th:replace="fragments/layout :: text-field(name='columnName', label=#{name}, 
+													 field=columnConfig.name, required=true, maxLength=30, autofocus=true)"></div>
 									
-									<!--/*
-									<div class="form-group">
-									    <label class="control-label col-xs-3" for="columnRemarks">Comentário</label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnRemarks" th:field="*{columnConfig.remarks}"/>
-									    </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: text-field(name='columnRemarks', label=#{comentario}, field=columnConfig.remarks)">
-									</div>
+									<div th:replace="fragments/layout :: text-field(name='columnRemarks', label=#{comentario}, field=columnConfig.remarks)"></div>
 									
-									<!--/*
-									<div class="form-group">
-									    <label class="control-label col-xs-3" for="columnType">Tipo <span>*</span></label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnType" th:field="*{columnConfig.type}"
-										     placeholder="VARCHAR2(255)"/>
-									    </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: text-field(name='columnType', label=#{type}, field=columnConfig.type, placeholder='VARCHAR2(255)')">
-									</div>
+									<div th:replace="fragments/layout :: text-field(name='columnType', label=#{type}, field=columnConfig.type, placeholder='VARCHAR2(255)')"></div>
 									
-									<!--/*
-									<div class="form-group">
-									    <label class="control-label col-xs-3" for="columnDefaultValue">Valor Padrão</label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnDefaultValue"
-										    	   th:field="*{columnConfig.defaultValue}"/>
-									    </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: text-field(name='columnDefaultValue', label=#{defaultValue}, field=columnConfig.defaultValue)">
-									</div>
+									<div th:replace="fragments/layout :: text-field(name='columnDefaultValue', label=#{defaultValue}, field=columnConfig.defaultValue)"></div>
 									
-									<!--/*
-									<div class="form-group">
-										<div class="col-xs-offset-3 col-xs-9">
-							                <label class="checkbox-inline">
-							                    <input type="checkbox" id="columnConstraintsNullable" th:field="*{columnConfig.nullable}"/>
-							                     Permite Nulo?
-							                </label>
-							            </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: checkbox-field(name='columnConstraintsNullable', label=#{nullable}, field=columnConfig.nullable)">
-									</div>
+									<div th:replace="fragments/layout :: checkbox-field(name='columnConstraintsNullable', label=#{nullable}, field=columnConfig.nullable)"></div>
 									
-									<!--/*
-									<div class="form-group">
-										<div class="col-xs-offset-3 col-xs-9">
-							                <label class="checkbox-inline">
-							                    <input type="checkbox" id="columnConstraintsPrimaryKey" th:field="*{columnConfig.primaryKey}"/>
-							                     Chave Primária?
-							                </label>
-							            </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: checkbox-field(name='columnConstraintsPrimaryKey', label=#{isPrimaryKey}, field=columnConfig.primaryKey)">
-									</div>
+									<div th:replace="fragments/layout :: checkbox-field(name='columnConstraintsPrimaryKey', label=#{isPrimaryKey},
+													 field=columnConfig.primaryKey)"></div>
 									
-									<!--/*
-							        <div class="form-group">
-						                <label class="control-label col-xs-3" for="columnConstraintsPrimaryKeyName">
-						                Nome da Chave Primária
-						                </label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnConstraintsPrimaryKeyName"
-												   th:field="*{columnConfig.constraints.primaryKeyName}" maxlength="30"
-												   placeholder="CNT_(TABELA)_PK"/>
-									    </div>
-							        </div>
-							        */-->
-							        <div th:include="fragments/layout :: text-field(name='columnConstraintsPrimaryKeyName', label=#{primaryKeyName}, maxLength=30, field=columnConfig.constraints.primaryKeyName, placeholder='CNT_(TABELA)_PK')">
-									</div>
+							        <div th:replace="fragments/layout :: text-field(name='columnConstraintsPrimaryKeyName', label=#{primaryKeyName},
+							        				 maxLength=30, field=columnConfig.constraints.primaryKeyName, placeholder='CNT_(TABELA)_PK')"></div>
 									
-									<!--/*
-									<div class="form-group">
-										<div class="col-xs-offset-3 col-xs-9">
-							                <label class="checkbox-inline">
-							                    <input type="checkbox" id="columnConstraintsUnique" th:field="*{columnConfig.unique}"/>
-							                     Unique?
-							                </label>
-							            </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: checkbox-field(name='columnConstraintsUnique', label=#{isUnique}, field=columnConfig.unique)">
-									</div>
+									<div th:replace="fragments/layout :: checkbox-field(name='columnConstraintsUnique', label=#{isUnique}, field=columnConfig.unique)"></div>
 									
-									<!--/*
-						            <div class="form-group">
-						                <label class="control-label col-xs-3" for="columnConstraintsUniqueName">Nome da Unique</label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnConstraintsUniqueName"
-												   th:field="*{columnConfig.constraints.uniqueConstraintName}" maxlength="30"
-												   placeholder="CNT_(TABELA)_(SEQUENCIAL 1,2,3...)_UK"/>
-									    </div>
-						            </div>
-						            */-->
-						            <div th:include="fragments/layout :: text-field(name='columnConstraintsUniqueName', label=#{uniqueName}, maxLength=30, field=columnConfig.constraints.uniqueConstraintName, placeholder='CNT_(TABELA)_(SEQUENCIAL 1,2,3...)_UK')">
-									</div>
+						            <div th:replace="fragments/layout :: text-field(name='columnConstraintsUniqueName', label=#{uniqueName}, 
+						            				maxLength=30, field=columnConfig.constraints.uniqueConstraintName, placeholder='CNT_(TABELA)_(SEQUENCIAL 1,2,3...)_UK')"></div>
 									
-									<!--/*
-									<div class="form-group">
-						                <label class="control-label col-xs-3" for="columnConstraintsForeignKeyName">
-						                Nome da Chave Estrangeira
-						                </label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnConstraintsForeignKeyName"
-												   th:field="*{columnConfig.constraints.foreignKeyName}" maxlength="30"
-												   placeholder="CNT_(TABELA ORIGEM)_(TABELA DESTINO)_FK"/>
-									    </div>
-							        </div>
-							        */-->
-							        <div th:include="fragments/layout :: text-field(name='columnConstraintsForeignKeyName', label=#{foreignKeyName}, maxLength=30, field=columnConfig.constraints.foreignKeyName, placeholder='CNT_(TABELA ORIGEM)_(TABELA DESTINO)_FK')">
-									</div>
+							        <div th:replace="fragments/layout :: text-field(name='columnConstraintsForeignKeyName', label=#{foreignKeyName},
+							        				 maxLength=30, field=columnConfig.constraints.foreignKeyName, placeholder='CNT_(TABELA ORIGEM)_(TABELA DESTINO)_FK')"></div>
 							           
-							        <!--/*
-						            <div class="form-group">
-						                <label class="control-label col-xs-3" for="columnConstraintsReferences">References</label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnConstraintsReferences"
-												   th:field="*{columnConfig.constraints.references}"
-												   placeholder="TABELA(COLUNA)"/>
-									    </div>
-						            </div>
-						            */-->
-						            <div th:include="fragments/layout :: text-field(name='columnConstraintsReferences', label=#{references}, field=columnConfig.constraints.references, placeholder='TABELA(COLUNA)')">
-									</div>
+						            <div th:replace="fragments/layout :: text-field(name='columnConstraintsReferences', label=#{references}, 
+						            				 field=columnConfig.constraints.references, placeholder='TABELA(COLUNA)')"></div>
 									
-									<!--/*
-									<div class="form-group">
-						                <label class="control-label col-xs-3" for="columnConstraintsCheckConstraint">
-						                Check Constraint
-						                </label>
-									    <div class="col-xs-9">
-										    <input type="text" class="form-control" id="columnConstraintsCheckConstraint"
-												   th:field="*{columnConfig.constraints.checkConstraint}"
-												   th:errorclass="fieldError"/>
-									    </div>
-									</div>
-									*/-->
-									<div th:include="fragments/layout :: text-field(name='columnConstraintsCheckConstraint', label=#{checkConstraint}, field=columnConfig.constraints.checkConstraint)">
-									</div>
+									<div th:replace="fragments/layout :: text-field(name='columnConstraintsCheckConstraint', label=#{checkConstraint}, 
+													 field=columnConfig.constraints.checkConstraint)"></div>
 				                </div>
 				                
-				                <!--/*
-				                <div class="modal-footer">
-				                    <button type="submit" name="adicionarColuna" class="btn btn-primary">OK</button>
-				                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				                </div>
-				                */-->
-				                <div th:include="fragments/layout :: modal-group-button-footer(name='adicionarColuna')">
-								</div>
+				                <div th:replace="fragments/layout :: modal-group-button-footer(name=adicionarColuna)"></div>
 				            </div>
 				        </div>
 				    </div>
@@ -288,19 +116,19 @@
 				
 				<fieldset>
 					<legend>Sequence</legend>
-					<div th:include="fragments/layout :: text-field(name='sequenceName', label=#{name}, field=createSequenceChange.sequenceName, maxLength=30)">
-					</div>
+					<div th:replace="fragments/layout :: text-field(name='sequenceName',
+									 label=#{name}, field=createSequenceChange.sequenceName, maxLength=30)"></div>
 					
-					<div th:include="fragments/layout :: text-field(name='sequenceSchemaName', label=#{schema}, field=createSequenceChange.schemaName, maxLength=30, required=true)">
-					</div>
+					<div th:replace="fragments/layout :: text-field(name='sequenceSchemaName', label=#{schema}, 
+									 field=createSequenceChange.schemaName, maxLength=30, required=true)"></div>
 				</fieldset>
 				
-				<div th:include="fragments/layout :: group-button"></div>
+				<div th:replace="fragments/layout :: group-button"></div>
 			</form>
 		</div>
+		
+		<div th:replace="fragments/layout :: footer"></div>
 	</body>
-	
-	<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
 	
 	<script>
 		$(document).ready(function() {

@@ -1,0 +1,21 @@
+spring:
+    application:
+        name: migrations
+    datasource:
+        driverClassName: oracle.jdbc.driver.OracleDriver
+        url: jdbc:oracle:thin:@192.168.254.17:1521:dev4
+        username: dbamvfor
+        password: dbamvfor
+        initialize: false
+    messages:
+        basename: messages/messages
+        defaultEncoding: UTF-8
+    thymeleaf:
+        cache: false
+server:
+    context-path: /migrations        
+#    servlet-path: # the servlet path, defaults to '/'
+liquibase:
+    enabled: false
+    changelog: classpath:/db/changelog/db.changelog-master.xml
+    liquibase.defaultSchema: dbamvfor

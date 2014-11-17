@@ -1,6 +1,7 @@
 package br.com.mv.liquibase.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "MV_GRUPO_PARAMETRO")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class GrupoParametro implements Serializable
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class GrupoParametro implements Serializable, ChangeSetLiquibaseInterface
 {
 	private static final long serialVersionUID = -1151478368823472217L;
 
@@ -36,5 +37,31 @@ import lombok.Setter;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "grupoParametro", targetEntity = Parametro.class, fetch = FetchType.LAZY)
     private Collection<Parametro> parametros;
+    
+
+	@Override
+	public String getSqlPrecondition() {
+		return "SELECT COUNT(1) FROM DBAMVFOR.MV_GRUPO_PARAMETRO WHERE DS_DESCRICAO = '" + descricao + "'";
+	}
+
+	@Override
+	public boolean isFieldNotInsertable(Field field) {
+		return false;
+	}
+
+	@Override
+	public String getWhereClause(Field field) {
+		return null;
+	}
+
+	@Override
+	public String getChangeSetComments() {
+		return "Inclusão do grupo parâmetro " + descricao;
+	}
+
+	@Override
+	public String getIdChangeSetDescription() {
+		return "insert_mv_grupo_parametro_" + descricao;
+	}
 
 }

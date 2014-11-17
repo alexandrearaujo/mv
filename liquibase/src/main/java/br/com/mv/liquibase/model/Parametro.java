@@ -1,6 +1,7 @@
 package br.com.mv.liquibase.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,9 +25,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "mv_parametro")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class Parametro implements Serializable
-{
+@Table(name = "MV_PARAMETRO")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class Parametro implements Serializable, ChangeSetLiquibaseInterface{
 	private static final long serialVersionUID = 1962151124769372760L;
 
 	@Id
@@ -57,7 +57,7 @@ import lombok.Setter;
 	private Long tipoParametro;
 	
 	@ManyToOne
-	@JoinColumn(name = "cd_grupo_parametro")
+	@JoinColumn(name = "CD_GRUPO_PARAMETRO")
 	private GrupoParametro grupoParametro;
 
 	@Column(name = "TELA", length = 50)
@@ -78,5 +78,35 @@ import lombok.Setter;
 	
 	@OneToMany(mappedBy="parametro", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<OpcaoParametro> opcoesParametros;
+	
+
+	@Override
+	public String getSqlPrecondition() {
+		return "SELECT COUNT(1) FROM DBAMVFOR.MV_PARAMETRO WHERE CHAVE = '" + chave + "'";
+	}
+
+	@Override
+	public boolean isFieldNotInsertable(Field field) {
+		return (field.equals(tipoMimeArquivo) || field.equals(nomeArquivo) || field.equals(arquivo));
+	}
+
+	@Override
+	public String getWhereClause(Field field) {
+		if (field.getType().equals(GrupoParametro.class) && grupoParametro != null && grupoParametro.getDescricao() != null) {
+			return "TRIM(DS_DESCRICAO) = '" + grupoParametro.getDescricao().trim() + "'";
+		}
+		
+		return null;
+	}
+
+	@Override
+	public String getChangeSetComments() {
+		return "Inclusão do parâmetro " + chave;
+	}
+
+	@Override
+	public String getIdChangeSetDescription() {
+		return "insert_mv_parametro_" + chave;
+	}
 	
 }

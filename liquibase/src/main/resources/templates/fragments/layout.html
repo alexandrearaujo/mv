@@ -16,10 +16,10 @@
 		*/-->
 
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" type="text/css"
-			  th:href="@{/webjars/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" media="all" />
+			  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" media="all" />
 			  
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css" type="text/css"
-			  th:href="@{/webjars/bootstrap/3.3.0/css/bootstrap-theme.min.css}" rel="stylesheet" media="all" />
+			  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap-theme.min.css}" rel="stylesheet" media="all" />
 			  
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 		
@@ -66,82 +66,90 @@
 			</div>
 		</div>
 		
-		<div th:fragment="text-field">
-			<div class="form-group">
-				<label class="control-label col-xs-3" for="__${name}__">
-					<span th:text="${label}"></span>
-					<span th:class="span-red" th:if="${required}" th:text="'*'"></span>
-				</label>
-				
-				<div class="col-xs-9">
-					<input type="text" class="form-control" th:id-name="__${name}__" th:field="*{__${field}__}" th:maxlength="${maxLength}"
-						   th:autofocus="${autofocus}" th:attr="data-bv-notempty=${required}" th:placeholder="${placeholder}"/> 
-				</div>
+		<th:block th:fragment="text-field">
+		<div class="form-group">
+			<label class="control-label col-xs-3" for="${name}">
+				<span th:text="${label}"></span>
+				<span th:class="span-red" th:if="${required}" th:text="'*'"></span>
+			</label>
+			
+			<div class="col-xs-9">
+				<th:block th:unless="${numRows}">
+				<input type="text" class="form-control" th:id-name="__${name}__" th:field="*{__${field}__}" th:maxlength="${maxLength}"
+					   th:autofocus="${autofocus}" th:attr="data-bv-notempty=${required}" th:placeholder="${placeholder}"/> 
+				</th:block>
+				<th:block th:if="${numRows}">
+				<textarea class="form-control" th:id-name="__${name}__" th:field="*{__${field}__}" th:maxlength="${maxLength}" th:rows="${numRows}"
+					      th:autofocus="${autofocus}" th:attr="data-bv-notempty=${required}" th:placeholder="${placeholder}"></textarea> 
+				</th:block>
 			</div>
 		</div>
+		</th:block>
 		
-		<div th:fragment="checkbox-field">
-			<div class="form-group">
-				<div class="col-xs-offset-3 col-xs-9">
-	                <label class="checkbox-inline">
-	                    <input type="checkbox" th:id-name="__${name}__" th:field="*{__${field}__}"/>
-	                    <span th:text="${label}"></span>
-	                </label>
-	            </div>
-			</div>
-		</div>
-		
-		<div th:fragment="group-button">
-			<div class="form-group form-actions">
-				<div class="col-xs-offset-3 col-xs-9">
-	              	<button type="submit" class="btn btn-success">
-	              		<span class="glyphicon glyphicon-ok"></span>
-	              		<span th:text="#{confirmar}"></span> 
-	              	</button>
-	              	
-	                <button type="reset" class="btn btn-warning">
-	                	<span class="glyphicon glyphicon-refresh"></span>
-	                	<span th:text="#{limpar}"></span> 
-	                </button>
-	                
-	              	<button type="button" class="btn btn-danger" onclick="history.back(1)">
-	              		<span class="glyphicon glyphicon-ban-circle"></span>
-	              		<span th:text="#{cancelar}"></span> 
-	              	</button>
-	          	</div>
-	        </div>
-		</div>
-		
-		<div th:fragment="modal-group-button-footer">
-			<div class="modal-footer">
-                <button type="submit" th:name="#{name}" class="btn btn-success">
-                	<span class="glyphicon glyphicon-ok"></span>
-	              	<span th:text="OK"></span> 
-                </button>
-                
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-             		<span class="glyphicon glyphicon-ban-circle"></span>
-             		<span th:text="#{cancelar}"></span> 
-             	</button>
+		<th:block th:fragment="checkbox-field">
+		<div class="form-group">
+			<div class="col-xs-offset-3 col-xs-9">
+                <label class="checkbox-inline">
+                    <input type="checkbox" th:id-name="__${name}__" th:field="*{__${field}__}"/>
+                    <span th:text="${label}"></span>
+                </label>
             </div>
 		</div>
+		</th:block>
 		
-		<!-- Footer -->
-		<div th:fragment="footer" id="footer">
-	        &copy; MV Fortaleza 2014.
-	      
+		<th:block th:fragment="group-button">
+		<div class="form-group form-actions">
+			<div class="col-xs-offset-3 col-xs-9">
+              	<button type="submit" class="btn btn-success">
+              		<span class="glyphicon glyphicon-ok"></span>
+              		<span th:text="#{confirmar}"></span> 
+              	</button>
+              	
+                <button type="reset" class="btn btn-warning">
+                	<span class="glyphicon glyphicon-refresh"></span>
+                	<span th:text="#{limpar}"></span> 
+                </button>
+                
+              	<button type="button" class="btn btn-danger" onclick="history.back(1)">
+              		<span class="glyphicon glyphicon-ban-circle"></span>
+              		<span th:text="#{cancelar}"></span> 
+              	</button>
+          	</div>
+        </div>
+		</th:block>
+		
+		<th:block th:fragment="modal-group-button-footer">
+		<div class="modal-footer">
+            <button type="submit" th:name="#{name}" class="btn btn-success">
+            	<span class="glyphicon glyphicon-ok"></span>
+           	<span th:text="OK"></span> 
+            </button>
+            
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+         		<span class="glyphicon glyphicon-ban-circle"></span>
+         		<span th:text="#{cancelar}"></span> 
+         	</button>
+        </div>
+		</th:block>
+		
+		
+		<th:block th:fragment="footer">
+		<footer class="footer">
+			&copy; MV Fortaleza 2014.
+      
 	        <!-- Bootstrap core JavaScript-->
 			<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}">
 			</script>
 			
 			<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.bootstrapvalidator/latest/js/bootstrapValidator.min.js"></script>
 			
-			<script type="text/javascript" src="../../js/language/pt_BR.js"></script>
+			<script type="text/javascript" src="../js/language/pt_BR.js"></script>
 			
 			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js"></script>
 		
 			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"
-					th:src="@{/webjars/bootstrap/3.3.0/js/bootstrap.min.js}"></script>
-	    </div>
+					th:src="@{/webjars/bootstrap/3.3.1/js/bootstrap.min.js}"></script>
+		</footer>
+		</th:block>
 	</body>
 </html>

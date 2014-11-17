@@ -3,7 +3,7 @@
 	<head th:include="fragments/layout :: htmlhead" th:with="title='Criação de Parametros'"/>
 
 	<body role="document">
-		<div th:replace="fragments/layout :: navbar">(navbar)</div>
+		<div th:replace="fragments/layout :: navbar"></div>
 	
 		<div class="container-fluid">
 			<div class="row-fluid row-content"> 
@@ -23,40 +23,24 @@
 				<fieldset>
 					<legend>Parametro</legend>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="chave">Chave <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" maxlength="50" autofocus="autofocus"
-						  	       id="chave" th:field="*{parametro.chave}" data-bv-notempty="true"/>
-					    </div>
-					</div>
+					<div th:replace="fragments/layout :: text-field(name=chave, label=#{chave},
+									 field=parametro.chave, required=true, maxLength=50, autofocus=true)"></div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="valor">Valor <span>*</span></label>
-					    <div class="col-xs-9">
-						    <input type="text" class="form-control" id="valor" name="valor" th:field="*{parametro.valor}"
-						    	   maxlength="300" data-bv-notempty="true"/>  
-					    </div>
-					</div>
+					<div th:replace="fragments/layout :: text-field(name=valor, label=#{valor},
+									 field=parametro.valor, required=true, maxLength=300)"></div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="remarks">Descrição <span>*</span></label>
-					    <div class="col-xs-9">
-						    <textarea rows="2" class="form-control" id="descricao" name="descricao" th:field="*{parametro.descricao}"
-						    	   maxlength="200" data-bv-notempty="true"></textarea>  
-					    </div>
-					</div>
+					<div th:replace="fragments/layout :: text-field(name=descricao, label=#{descricao},
+									 maxLength=200, field=parametro.descricao, required=true, numRows=2)"></div>
 					
-					<div class="form-group">
-					    <label class="control-label col-xs-3" for="remarks">Descrição do Objetivo</label>
-					    <div class="col-xs-9">
-						    <textarea rows="4" class="form-control" id="descricaoObjetivo" name="descricaoObjetivo"
-						    	      th:field="*{parametro.descricaoObjetivo}" maxlength="4000"></textarea>  
-					    </div>
-					</div>
+					<div th:replace="fragments/layout :: text-field(name=descricaoObjetivo, label=#{descricaoObjetivo},
+									 maxLength=4000, field=parametro.descricaoObjetivo, numRows=4)"></div>
 
 					<div class="form-group">
-						<label class="control-label col-xs-3" for="grupoParametro">Grupo Parametro <span>*</span></label>
+						<label class="control-label col-xs-3" for="grupoParametro">
+							<span th:text="#{grupoParametro}"></span>
+							<span th:class="span-red" th:text="'*'"></span>
+						</label>
+			
 						<div class="col-xs-9">
 							<select	th:field="*{parametro.grupoParametro}" class="form-control" id="grupoParametro" data-bv-notempty="true">
 								<option th:each="grupoParametro : ${grupoParametros}" th:value="${grupoParametro.id}"
@@ -84,15 +68,12 @@
 							</thead>
 	
 							<tbody>
-								<tr th:each="column, columnStat : *{parametro.opcoesParametros}">
-									<td th:text="${columnStat.count}"></td>
-									
-									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].flagAtivo}"></td>
-	
-									<td th:text="*{parametro.opcoesParametros[__${columnStat.index}__].descricaoOpcaoParametro}"></td>
-									
+								<tr th:each="opcaoParametro : *{parametro.opcoesParametros}">
+									<td th:text="${opcaoParametroStat.count}"></td>
+									<td th:text="${opcaoParametro.flagAtivo}"></td>
+									<td th:text="${opcaoParametro.descricaoOpcaoParametro}"></td>
 									<td>
-										<a th:href="@{|/createParametro/removerOpcaoParametro/${columnStat.index}|}" class="btn btn-danger" type="button">
+										<a th:href="@{|/createParametro/removerOpcaoParametro/${opcaoParametroStat.index}|}" class="btn btn-danger" type="button">
 									  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
 										</a>
 									</td>
@@ -102,15 +83,10 @@
 					</div>
 				</fieldset>
 				
-				<div class="form-group">
-	           		<div class="col-xs-offset-3 col-xs-9">
-						<button type="submit" name="salvar" class="btn btn-success btn-lg" role="button">Salvar</button>
-					</div>
-				</div>
+				<div th:replace="fragments/layout :: group-button"></div>
 			</form>
 			
-			<div id="addOpcaoParametroModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addOpcaoParametroModalLabel"
-		    	 aria-hidden="true">
+			<div id="addOpcaoParametroModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addOpcaoParametroModalLabel" aria-hidden="true">
 		        <div class="modal-dialog modal-lg">
 		            <div class="modal-content">
 		                <div class="modal-header">
@@ -125,32 +101,13 @@
 		                		  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
 			  					  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 			  					  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
-								<div class="form-group">
-									<div class="col-xs-offset-3 col-xs-9">
-						                <label class="checkbox-inline">
-						                    <input type="checkbox" id="ativo" th:field="*{opcaoParametro.flagAtivo}"/>
-						                     Ativo?
-						                </label>
-						            </div>
-								</div>
-
-						        <div class="form-group">
-					                <label class="control-label col-xs-3" for="descricaoOpcaoParametro">
-					                Descrição <span>*</span>
-					                </label>
-								    <div class="col-xs-9">
-									    <input type="text" class="form-control" id="descricaoOpcaoParametro"
-											   th:field="*{opcaoParametro.descricaoOpcaoParametro}" maxlength="200"
-											   data-bv-notempty="true"/>
-								    </div>
-						        </div>
+								
+								<div th:replace="fragments/layout :: checkbox-field(name='ativo', label=#{ativo}, field=opcaoParametro.flagAtivo)"></div>
 						        
-				                <div class="form-group">
-				                	<div class="col-xs-offset-3 col-xs-9">
-					                    <button type="submit" class="btn btn-primary" role="button" name="adicionarOpcaoParametro">OK</button>
-					                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				                	</div>
-				                </div>
+						        <div th:replace="fragments/layout :: text-field(name='descricaoOpcaoParametro', label=#{descricao}, 
+												 field=opcaoParametro.descricaoOpcaoParametro, required=true, maxLength=200, autofocus=true)"></div>
+				                
+				                <div th:replace="fragments/layout :: modal-group-button-footer(name=adicionarOpcaoParametro)"></div>
 		                	</form>
 		                </div>
 		                
@@ -158,9 +115,9 @@
 		        </div>
 		    </div>
 		</div>
+		
+		<div th:replace="fragments/layout :: footer"></div>
 	</body>
-	
-	<div th:include="fragments/layout :: footer" id="footer" class="footer">(footer)</div>
 	
 	<script>
 		$(document).ready(function() {

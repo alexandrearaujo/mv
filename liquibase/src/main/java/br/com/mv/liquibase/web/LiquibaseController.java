@@ -9,6 +9,7 @@ import liquibase.exception.LiquibaseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import br.com.mv.liquibase.service.LiquibaseDatabaseService;
 import br.com.mv.liquibase.service.ParametroService;
 
 @Controller
+@ControllerAdvice
 public class LiquibaseController {
 	
 	@Autowired
