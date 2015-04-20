@@ -20,6 +20,9 @@
             more: 'Por favor escolha %s opções no máximo',
             between: 'Por favor escolha de %s a %s opções'
         },
+        color: {
+            'default': 'Por favor insira uma cor válida'
+        },
         creditCard: {
             'default': 'Por favor insira um número de cartão de crédito válido'
         },
@@ -236,6 +239,7 @@
                 BR: 'Brasil',
                 CN: 'China',
                 CZ: 'República Checa',
+                DE: 'Alemanha',
                 DK: 'Dinamarca',
                 ES: 'Espanha',
                 FR: 'França',
@@ -340,14 +344,20 @@
             countryNotSupported: 'O código postal do país %s não é suportado',
             country: 'Por favor insira um código postal válido em %s',
             countries: {
+                AT: 'Áustria',
                 BR: 'Brasil',
                 CA: 'Canadá',
+                CH: 'Suíça',
                 CZ: 'República Checa',
+                DE: 'Alemanha',
                 DK: 'Dinamarca',
+                FR: 'França',
                 GB: 'Reino Unido',
+                IE: 'Irlanda',
                 IT: 'Itália',
                 MA: 'Marrocos',
                 NL: 'Holanda',
+                PT: 'Portugal',
                 RO: 'Roménia',
                 RU: 'Rússia',
                 SE: 'Suécia',

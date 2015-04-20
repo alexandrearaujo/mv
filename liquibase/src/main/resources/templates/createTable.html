@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-	<head th:include="fragments/layout :: htmlhead" th:with="title='Criação de Tabela'"/>
+	<head th:include="fragments/layout :: htmlhead" th:with="title=#{criacaoTabela}"/>
 
 	<body role="document">
-		<div th:replace="fragments/layout :: navbar">(navbar)</div>
+		<div th:replace="fragments/layout :: navbar"></div>
 	
 		<div class="container-fluid">
 			<div class="row-fluid row-content"> 
 	            <!-- Breadcrumb -->
 	            <ul class="breadcrumb">
 	              <li><a href="#">Home</a> <span class="divider"></span></li>
-	              <li>Criar <span class="divider"></span></li>
-	              <li class="active">Tabela</li>
+	              <li><span th:text="#{criar}"></span> <span class="divider"></span></li>
+	              <li class="active"><span th:text="#{tabela}"></span></li>
            		</ul>
        		</div>
          		
@@ -20,7 +20,7 @@
 				  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 				  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 				<fieldset>
-					<legend>Tabela</legend>
+					<legend th:text="#{tabela}"></legend>
 					<div th:replace="fragments/layout :: text-field(name='tableName', label=#{tableName},
 									 field=createTableChange.tableName, required=true, maxLength=30, autofocus=true)"></div>
 					
@@ -35,7 +35,7 @@
 				            <div class="modal-content">
 				                <div class="modal-header">
 				                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				                    <h4 class="modal-title" id="columnModalLabel">Adicionar Coluna</h4>
+				                    <h4 class="modal-title" id="columnModalLabel" th:text="#{adicionarColuna}"></h4>
 				                </div>
 				                
 				                <div class="modal-body">
@@ -84,13 +84,13 @@
 							<thead>
 								<tr class="info">
 									<th>#</th>
-									<th>Nome</th>
-									<th>Comentário</th>
-									<th>Tipo</th>
+									<th th:text="#{name}"></th>
+									<th th:text="#{comentario}"></th>
+									<th th:text="#{type}"></th>
 									<th>
 										<button type="button" class="btn btn-primary"
 												data-toggle="modal"	data-target="#columnModal">
-												<span class="glyphicon glyphicon-plus"></span> Adicionar Coluna
+												<span class="glyphicon glyphicon-plus"></span> <span th:text="#{adicionarColuna}"></span>
 									    </button>
 									</th>
 								</tr>
@@ -105,7 +105,7 @@
 									<td>
 										<button type="submit" role="button" name="removerColuna"
 												class="btn btn-danger" th:value="${columnStat.index}">
-										  		<span class="glyphicon glyphicon-remove"></span> Remover Coluna
+										  		<span class="glyphicon glyphicon-remove"></span> <span th:text="#{removerColunaS}"></span>
 										</button>
 									</td>
 								</tr>

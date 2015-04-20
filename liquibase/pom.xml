@@ -26,7 +26,6 @@
 		<tomcat.version>LATEST</tomcat.version>
 		<commons-lang3.version>LATEST</commons-lang3.version>
 		<liquibase.version>LATEST</liquibase.version>
-		<thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
 		<lombok.version>LATEST</lombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>br.com.mv.liquibase.Application</start-class>
@@ -103,12 +102,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>LATEST</version>
 		</dependency>
 	</dependencies>
 	

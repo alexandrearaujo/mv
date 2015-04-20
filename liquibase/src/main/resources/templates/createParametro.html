@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-	<head th:include="fragments/layout :: htmlhead" th:with="title='Criação de Parametros'"/>
+	<head th:include="fragments/layout :: htmlhead" th:with="title=#{criacaoParametro}"/>
 
 	<body role="document">
 		<div th:replace="fragments/layout :: navbar"></div>
@@ -10,19 +10,17 @@
 	            <!-- Breadcrumb -->
 	            <ul class="breadcrumb">
 	              <li><a href="#">Home</a> <span class="divider"></span></li>
-	              <li>Criar <span class="divider"></span></li>
-	              <li class="active">Parametro</li>
+	              <li><span th:text="#{criar}"></span> <span class="divider"></span></li>
+	              <li class="active"><span th:text="#{parametro}"></span></li>
            		</ul>
        		</div>
          		
-			<form id="parametroForm" class="form-horizontal" action="#" th:action="@{/createParametro}"
-				  th:object="${createParametroForm}" th:method="post"
+			<form id="parametroForm" class="form-horizontal" action="#" th:action="@{/createParametro}" th:object="${createParametroForm}" th:method="post"
 				  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
 				  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 				  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 				<fieldset>
-					<legend>Parametro</legend>
-					
+					<legend th:text="#{parametro}"></legend>
 					<div th:replace="fragments/layout :: text-field(name=chave, label=#{chave},
 									 field=parametro.chave, required=true, maxLength=50, autofocus=true)"></div>
 					
@@ -51,17 +49,17 @@
 				</fieldset>
 			
 			    <fieldset>
-					<legend>Opção Parametro</legend>
+					<legend th:text="#{opcaoParametro}"></legend>
 					<div class="table-responsive">
 						<table class="table table-condensed table-bordered table-striped table-hover">
 							<thead>
 								<tr class="info">
 									<th>#</th>
-									<th>Ativo</th>
-									<th>Descrição</th>
+									<th th:text="#{ativo}"></th>
+									<th th:text="#{descricao}"></th>
 									<th>
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOpcaoParametroModal">
-											<span class="glyphicon glyphicon-plus"></span> Adicionar Opção Parametro
+											<span class="glyphicon glyphicon-plus"></span> <span th:text="#{adicionarOpcaoParametro}"></span>
 									    </button>
 									</th>
 								</tr>
@@ -74,7 +72,7 @@
 									<td th:text="${opcaoParametro.descricaoOpcaoParametro}"></td>
 									<td>
 										<a th:href="@{|/createParametro/removerOpcaoParametro/${opcaoParametroStat.index}|}" class="btn btn-danger" type="button">
-									  		<span class="glyphicon glyphicon-remove"></span> Remover Opção Parametro
+									  		<span class="glyphicon glyphicon-remove"></span> <span th:text="#{removerOpcaoParametro}"></span>
 										</a>
 									</td>
 								</tr>
@@ -91,7 +89,7 @@
 		            <div class="modal-content">
 		                <div class="modal-header">
 		                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		                    <h4 class="modal-title" id="addOpcaoParametroModalLabel">Adicionar Opção Parametro</h4>
+		                    <h4 class="modal-title" id="addOpcaoParametroModalLabel" th:text="#{adicionarOpcaoParametro}"></h4>
 		                </div>
 		                
 		                <div class="modal-body">

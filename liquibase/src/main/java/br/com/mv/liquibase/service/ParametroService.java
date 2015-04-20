@@ -58,6 +58,7 @@ public class ParametroService {
 		parametro.getOpcoesParametros().size();
 		
 		for (OpcaoParametro opcaoParametro : parametro.getOpcoesParametros()) {
+			opcaoParametro.setParametro(parametro);
 			listChangeSet.add(opcaoParametro.createChangeSet(databaseChangeLog));
 		}
 	}
