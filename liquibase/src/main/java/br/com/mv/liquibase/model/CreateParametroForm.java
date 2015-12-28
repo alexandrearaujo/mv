@@ -1,25 +1,12 @@
 package br.com.mv.liquibase.model;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 public class CreateParametroForm {
 
 	private Parametro parametro;
 	private OpcaoParametro opcaoParametro;
 	
-	
-	public Parametro getParametro() {
-		return parametro;
-	}
-	
-	public void setParametro(Parametro parametro) {
-		this.parametro = parametro;
-	}
-	
-	public OpcaoParametro getOpcaoParametro() {
-		return opcaoParametro;
-	}
-	
-	public void setOpcaoParametro(OpcaoParametro opcaoParametro) {
-		this.opcaoParametro = opcaoParametro;
-	}
 }

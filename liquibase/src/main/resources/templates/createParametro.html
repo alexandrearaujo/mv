@@ -15,7 +15,7 @@
            		</ul>
        		</div>
          		
-			<form id="parametroForm" class="form-horizontal" action="#" th:action="@{/createParametro}" th:object="${createParametroForm}" th:method="post"
+			<form id="parametroForm" class="form-horizontal" th:action="@{/createParametro}" th:object="${createParametroForm}" th:method="post"
 				  data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
 				  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 				  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
@@ -40,9 +40,11 @@
 						</label>
 			
 						<div class="col-xs-9">
-							<select	th:field="*{parametro.grupoParametro}" class="form-control" id="grupoParametro" data-bv-notempty="true">
-								<option th:each="grupoParametro : ${grupoParametros}" th:value="${grupoParametro.id}"
-									    th:text="${grupoParametro.descricao}"></option>
+							<select	th:field="*{parametro.grupoParametro.id}" class="form-control" id="grupoParametro" data-bv-notempty="true">
+								<option th:each="grupoParametro : ${grupoParametros}"
+										th:value="${grupoParametro.id}"
+									    th:text="${grupoParametro.descricao}">
+								</option>
 							</select>
 						</div>
 					</div>
@@ -105,7 +107,7 @@
 						        <div th:replace="fragments/layout :: text-field(name='descricaoOpcaoParametro', label=#{descricao}, 
 												 field=opcaoParametro.descricaoOpcaoParametro, required=true, maxLength=200, autofocus=true)"></div>
 				                
-				                <div th:replace="fragments/layout :: modal-group-button-footer(name=adicionarOpcaoParametro)"></div>
+				                <div th:replace="fragments/layout :: modal-group-button-footer(name='adicionarOpcaoParametro')"></div>
 		                	</form>
 		                </div>
 		                

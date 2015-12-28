@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,14 +23,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.StreamException;
+
 import br.com.mv.liquibase.model.CreateParametroForm;
 import br.com.mv.liquibase.model.GrupoParametro;
 import br.com.mv.liquibase.model.OpcaoParametro;
 import br.com.mv.liquibase.model.Parametro;
 import br.com.mv.liquibase.service.CreateParametroService;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.StreamException;
 
 @Controller
 @SessionAttributes(types = CreateParametroForm.class)
@@ -41,16 +42,19 @@ public class CreateParametroController {
 	
 	private CreateParametroForm createParametroForm;
 	
+	private List<GrupoParametro> grupoParametros = null;
+
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public ModelAndView createParametro() {
+    public String createParametro(Model model) {
 		createParametroForm = new CreateParametroForm();
 		createParametroForm.setOpcaoParametro(new OpcaoParametro());
 		Parametro parametro = new Parametro();
 		parametro.setOpcoesParametros(new ArrayList<OpcaoParametro>());
+		parametro.setGrupoParametro(new GrupoParametro());
 		createParametroForm.setParametro(parametro);
-		ModelAndView modelAndView = new ModelAndView("createParametro", "createParametroForm", createParametroForm);
-        return modelAndView;
+		model.addAttribute("createParametroForm", createParametroForm);
+        return "createParametro";
     }
 	
 	@SuppressWarnings("unchecked")
@@ -59,7 +63,6 @@ public class CreateParametroController {
 		XStream xStream = new XStream();
         xStream.alias("grupoParametro", GrupoParametro.class);
         
-        List<GrupoParametro> grupoParametros = null;
         try
         {
         	grupoParametros = (List<GrupoParametro>) xStream.fromXML(new FileInputStream(new File("src/main/resources/grupoParametros.xml")));
@@ -107,11 +110,17 @@ public class CreateParametroController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-    public String salvar(@Valid CreateParametroForm createParametroForm,
+    public String salvar(@Valid @ModelAttribute CreateParametroForm createParametroForm,
     		final BindingResult bindingResult, final ModelMap model, SessionStatus status) {
         if (bindingResult.hasErrors()) {
             return "createParametro";
         }
+        
+		createParametroForm.getParametro()
+				.setGrupoParametro(grupoParametros.stream()
+						.filter(grupoParametro -> grupoParametro.getId()
+								.equals(createParametroForm.getParametro().getGrupoParametro().getId()))
+						.findFirst().get());
         
         createParametroService.salvar(createParametroForm);
         model.clear();
@@ -127,4 +136,5 @@ public class CreateParametroController {
 	public void setCreateParametroForm(CreateParametroForm createParametroForm) {
 		this.createParametroForm = createParametroForm;
 	}
+	
 }

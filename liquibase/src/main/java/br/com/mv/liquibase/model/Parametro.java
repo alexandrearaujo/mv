@@ -26,7 +26,9 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "MV_PARAMETRO")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor public class Parametro implements Serializable, ChangeSetLiquibaseInterface{
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+public class Parametro implements Serializable, ChangeSetLiquibaseInterface {
+	
 	private static final long serialVersionUID = 1962151124769372760L;
 
 	@Id
