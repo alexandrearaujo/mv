@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mv.liquibase.model.ColumnConfigLiquibase;
@@ -92,7 +93,7 @@ public class CreateTableController {
         return modelAndView;
     }
 	
-	@RequestMapping(value="/createTable", params={"salvar"})
+	@RequestMapping(value="/createTable", method = RequestMethod.POST)
     public String salvar(@ModelAttribute("createTableForm") CreateTableForm createTableForm, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             return "createTable";

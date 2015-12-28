@@ -79,7 +79,7 @@ public class CreateTableService {
 		List<ChangeSet> listChangeSet = new ArrayList<ChangeSet>();
 		listChangeSet.add(changeSet);
 		
-		try (OutputStream os = new FileOutputStream("src/main/resources/db/changelog/tables/" + Versao.getVersaoAtual() + "_" + LocalDate.now()  + "_create_table_" + createTableForm.getCreateTableChange().getTableName())) {
+		try (OutputStream os = new FileOutputStream("src/main/resources/db/changelog/tables/" + Versao.getVersaoAtual() + "_" + LocalDate.now()  + "_create_table_" + createTableForm.getCreateTableChange().getTableName() + ".xml")) {
 			XMLChangeLogSerializer xmlChangeLogSerializer = new XMLChangeLogSerializer();
 			xmlChangeLogSerializer.write(listChangeSet, os);
 		} catch (IOException e) {

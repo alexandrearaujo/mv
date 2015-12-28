@@ -14,7 +14,7 @@ public class Versao {
 			Properties versaoAtual = new Properties();
 			ClassLoader classLoader = Versao.class.getClassLoader();
 			
-			URL versaoFile = classLoader.getResource("versao.properties");
+			URL versaoFile = classLoader.getResource("config/versao.properties");
 			InputStream in = null;
 			try {
 				if (versaoFile != null) {

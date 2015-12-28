@@ -71,7 +71,7 @@
 													 field=columnConfig.constraints.checkConstraint)"></div>
 				                </div>
 				                
-				                <div th:replace="fragments/layout :: modal-group-button-footer(name=adicionarColuna)"></div>
+				                <div th:replace="fragments/layout :: modal-group-button-footer(name='adicionarColuna')"></div>
 				            </div>
 				        </div>
 				    </div>
@@ -105,7 +105,7 @@
 									<td>
 										<button type="submit" role="button" name="removerColuna"
 												class="btn btn-danger" th:value="${columnStat.index}">
-										  		<span class="glyphicon glyphicon-remove"></span> <span th:text="#{removerColunaS}"></span>
+										  		<span class="glyphicon glyphicon-remove"></span> <span th:text="#{removerColuna}"></span>
 										</button>
 									</td>
 								</tr>
